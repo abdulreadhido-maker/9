@@ -1,0 +1,31 @@
+.videos-section{
+  padding:120px 20px;
+}
+
+.videos-grid{
+  max-width:1300px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.video-card{
+  border-radius:25px;
+  overflow:hidden;
+  border:1px solid rgba(0,229,255,.2);
+  background:#0f172a;
+  transition:.5s;
+}
+
+.video-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 35px rgba(0,229,255,.25);
+}
+
+.video-card video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
