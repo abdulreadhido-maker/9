@@ -1,214 +1,4 @@
-
-  <!-- NAVBAR -->
-
-  <nav>
-    <div class="nav-container">
-
-      <div class="logo">Torrema</div>
-
-     <ul class="nav-links">
-  <li><a href="index.html">الرئيسية</a></li>
-  <li><a href="services.html">الخدمات</a></li>
-  <li><a href="gallery.html">المعرض</a></li>
-  <li><a href="details.html">التفاصيل</a></li>
-       
-</ul>
-     
-    </div>
-  </nav>
-
-  <!-- HERO -->
-
-  <section class="hero" id="home">
-
-    <div class="hero-content">
-
-      <h1>Torrema</h1>
-
-      <p>
-        Welcome to Torrema
-      </p>
-
-      <div class="hero-buttons">
-
-        <button class="btn btn-primary" onclick="showMessage()">
-          ابدأ الآن
-        </button>
-
-        <button class="btn btn-outline">
-          استكشف
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- SERVICES -->
-
-  <section class="services" id="services">
-    <section class="contact" id="details">
-
-    <h2 class="section-title hidden">
-      خدمات Torrema
-    </h2>
-
-    <div class="cards">
-
-      <div class="card hidden">
-        <h3></h3>
-        <p>
-          
-        </p>
-      </div>
-
-      <div class="card hidden">
-        <h3></h3>
-        <p>
-          
-        </p>
-      </div>
-
-      <div class="card hidden">
-        <h3></h3>
-        <p>
-          
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- GALLERY -->
-
-  <section class="gallery" id="gallery">
-
-    <h2 class="section-title hidden">
-      
-    </h2>
-
-    <div class="gallery-grid">
-
-      <div class="gallery-item hidden">
-        <img loading="lazy"
-        src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1974&auto=format&fit=crop">
-      </div>
-
-      <div class="gallery-item hidden">
-        <img loading="lazy"
-        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop">
-      </div>
-
-      <div class="gallery-item hidden">
-        <img loading="lazy"
-        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop">
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- CONTACT -->
-
-  <section class="contact" id="contact">
-
-    <h2 class="section-title hidden">
-      تواصل معنا
-    </h2>
-
-    <div class="contact-box hidden">
-
-      <form>
-
-        <input
-        type="text"
-        class="input"
-        placeholder="الاسم">
-
-        <input
-        type="email"
-        class="input"
-        placeholder="البريد الإلكتروني">
-
-        <textarea
-        class="input"
-        placeholder="رسالتك"></textarea>
-
-        <button class="btn btn-primary">
-          إرسال الرسالة
-        </button>
-
-      </form>
-
-    </div>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer>
-    © 2026 Torrema — جميع الحقوق محفوظة
-  </footer>
-
-  <!-- SCROLL TOP -->
-
-  <button class="scroll-top" id="scrollTop">
-    ↑
-  </button>
-
-  <script>
-
-    // رسالة ترحيب
-
-    function showMessage(){
-      alert("مرحباً بك في Torrema");
-    }
-
-    // ظهور العناصر
-
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-          entry.target.classList.add("show");
-        }
-
-      });
-    });
-
-    document.querySelectorAll(".hidden").forEach((el)=>{
-      observer.observe(el);
-    });
-
-    // زر العودة للأعلى
-
-    const scrollTopBtn = document.getElementById("scrollTop");
-
-    window.addEventListener("scroll",()=>{
-
-      if(window.scrollY > 400){
-        scrollTopBtn.style.display = "block";
-      }else{
-        scrollTopBtn.style.display = "none";
-      }
-
-    });
-
-    scrollTopBtn.addEventListener("click",()=>{
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
-
-    });
-
-  </script>
-
-</body>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -364,9 +154,9 @@
 <!-- HERO -->
 <section id="home" class="hero">
   <div>
-    <h1>Torrema</h1>
-    <p></p>
-    <button onclick="alert('لام يتم اتمامه It was not completed')"></button>
+    <h1>IRIN</h1>
+    <p>موقع تقني حديث بتصميم احترافي</p>
+    <button onclick="alert('مرحبا بك في Torrema 🚀')">ابدأ الآن</button>
   </div>
 </section>
 
@@ -403,7 +193,7 @@
 
     <div class="grid">
       <video controls>
-        <source src="https://www.youtube.com/embed/Kfad-0JcZy4"
+        <source src="videos/electronics1.mp4">
       </video>
 
       <video controls>
@@ -419,9 +209,9 @@
     <h2>التفاصيل</h2>
 
     <div class="grid">
-      <div class="card">It was not completed</div>
-      <div class="card">It was not completed</div>
-      <div class="card">It was not completed</div>
+      <div class="card">واجهة حديثة وسريعة</div>
+      <div class="card">تصميم متجاوب للجوال</div>
+      <div class="card">تطوير مستقبلي</div>
     </div>
   </div>
 </section>
@@ -442,10 +232,8 @@
 
 <!-- FOOTER -->
 <footer>
-  © 2026 Torrema
- - جميع الحقوق محفوظة
+  © 2026 Torrema - جميع الحقوق محفوظة
 </footer>
 
 </body>
-</html>
 </html>
