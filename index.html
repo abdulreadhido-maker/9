@@ -1,9 +1,495 @@
+ <html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ايرين</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* خلفية تقنية متحركة */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at center, rgba(0,255,255,0.08), transparent 20%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(0,255,255,0.04) 0px,
+          rgba(0,255,255,0.04) 1px,
+          transparent 1px,
+          transparent 80px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0,255,255,0.04) 0px,
+          rgba(0,255,255,0.04) 1px,
+          transparent 1px,
+          transparent 80px
+        );
+      animation: moveBg 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes moveBg {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-100px, -100px);
+      }
+    }
+
+    /* شريط المهام */
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,255,255,0.2);
+    }
+
+    nav h1 {
+      color: cyan;
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px cyan;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    nav ul li a:hover {
+      color: cyan;
+      text-shadow: 0 0 10px cyan;
+    }
+
+    /* الصفحة الرئيسية */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .hero-content {
+      animation: fadeUp 1.5s ease;
+    }
+
+    .hero h2 {
+      font-size: 70px;
+      margin-bottom: 20px;
+      color: cyan;
+      text-shadow: 0 0 20px cyan;
+    }
+
+    .hero p {
+      font-size: 22px;
+      color: #d0d0d0;
+      margin-bottom: 30px;
+    }
+
+    .hero button {
+      padding: 15px 35px;
+      background: cyan;
+      border: none;
+      border-radius: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    .hero button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px cyan;
+    }
+
+    /* قسم الخدمات */
+    .services {
+      padding: 120px 40px;
+      text-align: center;
+    }
+
+    .services h3 {
+      font-size: 40px;
+      margin-bottom: 50px;
+      color: cyan;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,255,255,0.2);
+      padding: 35px;
+      border-radius: 20px;
+      transition: 0.4s;
+      backdrop-filter: blur(10px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(0,255,255,0.4);
+    }
+
+    .card h4 {
+      color: cyan;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    /* التذييل */
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid rgba(0,255,255,0.2);
+      color: #aaa;
+    }
+
+    /* تأثيرات */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+
+      .hero h2 {
+        font-size: 45px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- شريط المهام -->
+  <nav>
+    <h1>ايرين</h1>
+
+    <ul>
+      <li><a href="#">الرئيسية</a></li>
+      <li><a href="#services">الخدمات</a></li>
+      <li><a href="#">تواصل</a></li>
+    </ul>
+  </nav>
+
+  <!-- الصفحة الرئيسية -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>ايرين</h2>
+      <p>
+        موقع تقني عصري بتصميم داكن وتأثيرات احترافية.
+      </p>
+
+      <button onclick="showMessage()">ابدأ الآن</button>
+    </div>
+  </section>
+
+  <!-- الخدمات -->
+  <section class="services" id="services">
+    <h3>مميزات الموقع</h3>
+
+    <div class="cards">
+      <div class="card">
+        <h4>تصميم داكن</h4>
+        <p>واجهة حديثة بألوان تقنية مريحة للعين.</p>
+      </div>
+
+      <div class="card">
+        <h4>سرعة عالية</h4>
+        <p>الموقع خفيف وسريع على الجوال والكمبيوتر.</p>
+      </div>
+
+      <div class="card">
+        <h4>تأثيرات احترافية</h4>
+        <p>حركات وانتقالات تعطي شكل احترافي.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- التذييل -->
+  <footer>
+    © 2026 جميع الحقوق محفوظة - ايرين
+  </footer>
+
+  <script>
+    function showMessage() {
+      alert("مرحباً بك في موقع ايرين");
+    }
+
+    // تأثير ظهور العناصر عند التمرير
+    const cards = document.querySelectorAll('.card');
+
+    window.addEventListener('scroll', () => {
+      cards.forEach(card => {
+        const top = card.getBoundingClientRect().top;
+
+        if (top < window.innerHeight - 100) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
+      });
+    });
+
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(40px)';
+      card.style.transition = '0.7s';
+    });
+  </script>
+
+</body>
+  export default function IrinWebsite() {
+  return (
+    <div className="bg-black text-white min-h-screen font-sans overflow-x-hidden">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full bg-black/80 backdrop-blur-md border-b border-cyan-500 z-50">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+          <h1 className="text-3xl font-bold text-cyan-400 tracking-widest animate-pulse">
+            IRIN
+          </h1>
+
+          <ul className="flex gap-6 text-sm md:text-base">
+            <li><a href="#home" className="hover:text-cyan-400 duration-300">الرئيسية</a></li>
+            <li><a href="#services" className="hover:text-cyan-400 duration-300">الخدمات</a></li>
+            <li><a href="#gallery" className="hover:text-cyan-400 duration-300">المعرض</a></li>
+            <li><a href="#settings" className="hover:text-cyan-400 duration-300">الإعدادات</a></li>
+            <li><a href="#contact" className="hover:text-cyan-400 duration-300">التواصل</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="relative h-screen flex items-center justify-center text-center px-6"
+      >
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1974&auto=format&fit=crop"
+            alt="technology"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black"></div>
+        </div>
+
+        <div className="relative z-10 animate-fade-in-up">
+          <h2 className="text-5xl md:text-7xl font-extrabold text-cyan-400 drop-shadow-lg mb-6">
+            IRIN
+          </h2>
+          <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto leading-8">
+            موقع إلكتروني احترافي بتصميم تقني داكن وتأثيرات حديثة وتجربة مستخدم متطورة.
+          </p>
+
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+            <button className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-6 py-3 rounded-2xl shadow-lg hover:scale-105 duration-300">
+              ابدأ الآن
+            </button>
+
+            <button className="border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black px-6 py-3 rounded-2xl hover:scale-105 duration-300">
+              استكشف
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-24 px-6 bg-zinc-950">
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-4xl font-bold text-cyan-400 mb-14">
+            خدمات الموقع
+          </h3>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-zinc-900 p-8 rounded-3xl border border-cyan-500 hover:-translate-y-2 hover:shadow-cyan-500/40 shadow-lg duration-300">
+              <h4 className="text-2xl font-bold mb-4">تغيير اللغة</h4>
+              <p className="text-gray-400 leading-7">
+                إمكانية التحويل بين اللغة العربية والإنجليزية بسهولة.
+              </p>
+            </div>
+
+            <div className="bg-zinc-900 p-8 rounded-3xl border border-cyan-500 hover:-translate-y-2 hover:shadow-cyan-500/40 shadow-lg duration-300">
+              <h4 className="text-2xl font-bold mb-4">مساعدة المستخدم</h4>
+              <p className="text-gray-400 leading-7">
+                إعدادات مساعدة وتسهيلات للوصول السريع وتجربة أفضل.
+              </p>
+            </div>
+
+            <div className="bg-zinc-900 p-8 rounded-3xl border border-cyan-500 hover:-translate-y-2 hover:shadow-cyan-500/40 shadow-lg duration-300">
+              <h4 className="text-2xl font-bold mb-4">صفحات خاصة</h4>
+              <p className="text-gray-400 leading-7">
+                لكل قسم صفحة خاصة مع تصميم عصري وتأثيرات احترافية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section id="gallery" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-4xl font-bold text-cyan-400 mb-14">
+            معرض إلكتروني
+          </h3>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <img
+              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop"
+              className="rounded-3xl hover:scale-105 duration-300 border border-cyan-500"
+            />
+
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
+              className="rounded-3xl hover:scale-105 duration-300 border border-cyan-500"
+            />
+
+            <img
+              src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=2070&auto=format&fit=crop"
+              className="rounded-3xl hover:scale-105 duration-300 border border-cyan-500"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Settings */}
+      <section id="settings" className="py-24 px-6 bg-zinc-950">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-4xl font-bold text-cyan-400 mb-10">
+            الإعدادات
+          </h3>
+
+          <div className="bg-zinc-900 border border-cyan-500 rounded-3xl p-10 shadow-xl">
+            <div className="flex flex-col gap-6 text-right">
+              <div className="flex justify-between items-center border-b border-zinc-700 pb-4">
+                <span>الوضع الليلي</span>
+                <button className="bg-cyan-500 px-4 py-2 rounded-xl text-black font-bold">
+                  مفعل
+                </button>
+              </div>
+
+              <div className="flex justify-between items-center border-b border-zinc-700 pb-4">
+                <span>تغيير اللغة</span>
+                <button className="bg-cyan-500 px-4 py-2 rounded-xl text-black font-bold">
+                  عربي / English
+                </button>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <span>مساعدة المستخدم</span>
+                <button className="bg-cyan-500 px-4 py-2 rounded-xl text-black font-bold">
+                  تشغيل
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-24 px-6 text-center">
+        <h3 className="text-4xl font-bold text-cyan-400 mb-8">
+          تواصل معنا
+        </h3>
+
+        <p className="text-gray-400 mb-10 max-w-xl mx-auto leading-8">
+          يمكنك التواصل معنا للحصول على خدمات تقنية وتصميمات إلكترونية حديثة.
+        </p>
+
+        <form className="max-w-2xl mx-auto grid gap-6">
+          <input
+            type="text"
+            placeholder="الاسم"
+            className="bg-zinc-900 border border-cyan-500 rounded-2xl p-4 outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+
+          <input
+            type="email"
+            placeholder="البريد الإلكتروني"
+            className="bg-zinc-900 border border-cyan-500 rounded-2xl p-4 outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+
+          <textarea
+            placeholder="رسالتك"
+            rows="5"
+            className="bg-zinc-900 border border-cyan-500 rounded-2xl p-4 outline-none focus:ring-2 focus:ring-cyan-400"
+          ></textarea>
+
+          <button className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-4 rounded-2xl hover:scale-105 duration-300">
+            إرسال
+          </button>
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-zinc-800 py-6 text-center text-gray-500">
+        © 2026 IRIN - جميع الحقوق محفوظة
+      </footer>
+    </div>
+  );
+}
+
+</html>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Torrema</title>
+  <title>IRIN</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
 
@@ -138,7 +624,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav">
-    <div class="logo">Torrema</div>
+    <div class="logo">IRIN</div>
 
     <ul>
       <li><a href="#home">الرئيسية</a></li>
@@ -156,7 +642,7 @@
   <div>
     <h1>IRIN</h1>
     <p>موقع تقني حديث بتصميم احترافي</p>
-    <button onclick="alert('مرحبا بك في Torrema 🚀')">ابدأ الآن</button>
+    <button onclick="alert('مرحبا بك في IRIN 🚀')">ابدأ الآن</button>
   </div>
 </section>
 
@@ -232,7 +718,7 @@
 
 <!-- FOOTER -->
 <footer>
-  © 2026 Torrema - جميع الحقوق محفوظة
+  © 2026 IRIN - جميع الحقوق محفوظة
 </footer>
 
 </body>
