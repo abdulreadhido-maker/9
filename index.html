@@ -1,239 +1,223 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IRIN</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torrema</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+  scroll-behavior:smooth;
+}
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Cairo',sans-serif;
-      scroll-behavior:smooth;
-    }
+body{
+  background:#050816;
+  color:white;
+  overflow-x:hidden;
+}
 
-    body{
-      background:#050816;
-      color:white;
-    }
+/* خلفية تقنية */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:
+    radial-gradient(circle, rgba(0,255,255,0.1) 1px, transparent 1px);
+  background-size:50px 50px;
+  animation:move 25s linear infinite;
+  z-index:-1;
+}
 
-    /* NAV */
-    nav{
-      position:fixed;
-      top:0;
-      right:0;
-      width:100%;
-      background:rgba(0,0,0,.6);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid cyan;
-      z-index:1000;
-    }
+@keyframes move{
+  from{transform:translate(0,0);}
+  to{transform:translate(-100px,-100px);}
+}
 
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:15px 20px;
-    }
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid cyan;
+  z-index:1000;
+}
 
-    .logo{
-      color:cyan;
-      font-size:28px;
-      font-weight:bold;
-    }
+nav h1{
+  color:cyan;
+  font-size:26px;
+}
 
-    ul{
-      display:flex;
-      gap:20px;
-      list-style:none;
-    }
+nav a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+  transition:0.3s;
+}
 
-    a{
-      color:white;
-      text-decoration:none;
-      transition:.3s;
-    }
+nav a:hover{
+  color:cyan;
+}
 
-    a:hover{
-      color:cyan;
-    }
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    /* SECTIONS */
-    section{
-      padding:120px 20px;
-      scroll-margin-top:90px;
-    }
+.hero h1{
+  font-size:70px;
+  color:cyan;
+  text-shadow:0 0 20px cyan;
+}
 
-    .container{
-      max-width:1200px;
-      margin:auto;
-    }
+.hero p{
+  color:#aaa;
+  margin:15px 0;
+}
 
-    /* HERO */
-    .hero{
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
+/* زر */
+button{
+  padding:12px 25px;
+  background:cyan;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.3s;
+}
 
-    .hero h1{
-      font-size:70px;
-      color:cyan;
-    }
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px cyan;
+}
 
-    .hero p{
-      color:#aaa;
-      margin:20px 0;
-    }
+/* أقسام */
+section{
+  padding:120px 20px;
+  text-align:center;
+}
 
-    button{
-      padding:12px 25px;
-      background:cyan;
-      border:none;
-      border-radius:20px;
-      cursor:pointer;
-      font-weight:bold;
-    }
+.card{
+  background:#0f172a;
+  border:1px solid cyan;
+  padding:20px;
+  margin:15px;
+  border-radius:15px;
+  transition:0.3s;
+}
 
-    /* CARDS */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
-    }
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 20px cyan;
+}
 
-    .card{
-      background:#0f172a;
-      padding:25px;
-      border:1px solid cyan;
-      border-radius:15px;
-    }
-
-    /* VIDEOS */
-    video{
-      width:100%;
-      border-radius:15px;
-      border:1px solid cyan;
-    }
-
-    footer{
-      text-align:center;
-      padding:20px;
-      border-top:1px solid cyan;
-      color:#aaa;
-    }
-  </style>
+/* زر رجوع */
+#topBtn{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  display:none;
+}
+</style>
 </head>
 
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav">
-    <div class="logo">IRIN</div>
-
-    <ul>
-      <li><a href="#home">الرئيسية</a></li>
-      <li><a href="#services">الخدمات</a></li>
-      <li><a href="#gallery">المعرض</a></li>
-      <li><a href="#videos">الفيديوهات</a></li>
-      <li><a href="#details">التفاصيل</a></li>
-      <li><a href="#contact">التواصل</a></li>
-    </ul>
+  <h1>Torrema</h1>
+  <div>
+    <a href="#home">الرئيسية</a>
+    <a href="#services">الخدمات</a>
+    <a href="#gallery">المعرض</a>
+    <a href="#contact">التواصل</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section id="home" class="hero">
+<section class="hero" id="home">
   <div>
-    <h1>IRIN</h1>
-    <p>موقع تقني حديث بتصميم احترافي</p>
-    <button onclick="alert('مرحبا بك في IRIN 🚀')">ابدأ الآن</button>
+    <h1 id="title">Torrema</h1>
+    <p>موقع إلكتروني تقني بتصميم داكن ومستقبلي</p>
+    <button onclick="start()">ابدأ الآن</button>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="container">
-    <h2>الخدمات</h2>
-
-    <div class="grid">
-      <div class="card">تصميم مواقع حديثة</div>
-      <div class="card">برمجة احترافية</div>
-      <div class="card">تطوير واجهات</div>
-    </div>
-  </div>
+  <h2>الخدمات</h2>
+  <div class="card">تصميم مواقع حديثة</div>
+  <div class="card">برمجة احترافية</div>
+  <div class="card">تجربة مستخدم UI/UX</div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery">
-  <div class="container">
-    <h2>المعرض</h2>
-
-    <div class="grid">
-      <img class="card" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" />
-      <img class="card" src="https://images.unsplash.com/photo-1518770660439-4636190af475" />
-      <img class="card" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3" />
-    </div>
-  </div>
-</section>
-
-<!-- VIDEOS -->
-<section id="videos">
-  <div class="container">
-    <h2>الفيديوهات الإلكترونية</h2>
-
-    <div class="grid">
-      <video controls>
-        <source src="videos/electronics1.mp4">
-      </video>
-
-      <video controls>
-        <source src="videos/electronics2.mp4">
-      </video>
-    </div>
-  </div>
-</section>
-
-<!-- DETAILS -->
-<section id="details">
-  <div class="container">
-    <h2>التفاصيل</h2>
-
-    <div class="grid">
-      <div class="card">واجهة حديثة وسريعة</div>
-      <div class="card">تصميم متجاوب للجوال</div>
-      <div class="card">تطوير مستقبلي</div>
-    </div>
-  </div>
+  <h2>المعرض الإلكتروني</h2>
+  <div class="card">صور تقنية حديثة</div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="container">
-    <h2>التواصل</h2>
-
-    <div class="card">
-      <input placeholder="الاسم" style="width:100%;padding:10px;margin:10px 0;">
-      <input placeholder="البريد" style="width:100%;padding:10px;margin:10px 0;">
-      <textarea placeholder="رسالتك" style="width:100%;padding:10px;margin:10px 0;"></textarea>
-      <button>إرسال</button>
-    </div>
+  <h2>التواصل</h2>
+  <div class="card">
+    <input placeholder="الاسم" style="width:100%;padding:10px;margin:10px 0;">
+    <input placeholder="البريد" style="width:100%;padding:10px;margin:10px 0;">
+    <textarea placeholder="رسالتك" style="width:100%;padding:10px;margin:10px 0;"></textarea>
+    <button>إرسال</button>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 IRIN - جميع الحقوق محفوظة
-</footer>
+<button id="topBtn" onclick="scrollTopPage()">↑</button>
+
+<script>
+function start(){
+  alert("مرحباً بك في Torrema 🚀");
+}
+
+/* زر الرجوع للأعلى */
+window.onscroll = function(){
+  let btn = document.getElementById("topBtn");
+  if(document.documentElement.scrollTop > 300){
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+};
+
+function scrollTopPage(){
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* تأثير كتابة */
+let text = "Torrema";
+let i = 0;
+document.getElementById("title").innerHTML = "";
+
+function typing(){
+  if(i < text.length){
+    document.getElementById("title").innerHTML += text[i];
+    i++;
+    setTimeout(typing,150);
+  }
+}
+
+typing();
+</script>
 
 </body>
 </html>
