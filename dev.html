@@ -1,17 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>برمجة احترافية</title>
-    <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; text-align: center; padding: 100px; }
-        h1 { color: #ff00cc; font-size: 40px; }
-        .back-btn { margin-top: 30px; display: inline-block; padding: 10px 20px; background: white; color: black; text-decoration: none; border-radius: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torrema | برمجة احترافية</title>
+<style>
+:root {
+  --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
+  --secondary: #94a3b8;
+  --bg-dark: #0a0a0c;
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--bg-dark); color: white; padding: 60px 8%; min-height: 100vh; }
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 204, 0.05), transparent 70%); z-index: -1;
+}
+.header { text-align: center; margin-bottom: 50px; }
+.header h1 { font-size: 40px; margin-bottom: 15px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; }
+.container { max-width: 900px; margin: 0 auto; }
+.section-box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; margin-bottom: 30px; backdrop-filter: blur(6px); }
+.section-box h2 { color: #ff00cc; margin-bottom: 15px; font-size: 22px; }
+.tech-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+.tag { background: rgba(255, 0, 204, 0.1); border: 1px solid rgba(255, 0, 204, 0.3); padding: 6px 15px; border-radius: 20px; color: #ff00cc; font-size: 14px; font-weight: bold; }
+ul { list-style: none; }
+ul li { margin-bottom: 12px; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
+ul li::before { content: "🛡️"; }
+.back-btn { display: inline-block; padding: 12px 30px; background: var(--primary-gradient); background-size: 200%; border: none; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: 20px; }
+.back-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 204, 0.3); }
+</style>
 </head>
 <body>
-    <h1>💻 صفحة البرمجة الاحترافية</h1>
-    <p>هذه صفحة مستقلة تماماً (dev.html) تشرح تفاصيل الأكواد النظيفة والحماية.</p>
-    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية</a>
+
+<div class="container">
+  <div class="header">
+    <h1>💻 برمجة وتطوير النظم والمنصات</h1>
+    <p>نبني العقول الخلفية للمواقع بأحدث التقنيات لضمان السرعة، الاستقرار، والأمان المطلق.</p>
+  </div>
+
+  <div class="section-box">
+    <h2>معايير جودة الكود لدينا</h2>
+    <ul>
+      <li>حماية قصوى ضد ثغرات الاختراق الشهيرة (SQL Injection & XSS).</li>
+      <li>قواعد بيانات منظمة ومحسنة تتحمل آلاف الزوار في نفس الدقيقة دون بطء.</li>
+      <li>لوحة تحكم سهلة باللغة العربية لإدارة محتوى موقعك بالكامل بدون خبرة برمجية.</li>
+      <li>ربط آمن مع بوابات الدفع الإلكتروني (مدى، فيزا، ماستر كارد، تمارا).</li>
+    </ul>
+  </div>
+
+  <div class="section-box">
+    <h2>التقنيات الحديثة التي نعتمد عليها:</h2>
+    <p style="color: var(--secondary); font-size: 15px;">نحن لا نستخدم أدوات قديمة، بل نعتمد على بيئات عمل ذكية تضمن للموقع الاستمرار لسنوات:</p>
+    <div class="tech-tags">
+      <span class="tag">Node.js</span>
+      <span class="tag">React.js</span>
+      <span class="tag">Python / Django</span>
+      <span class="tag">MongoDB / MySQL</span>
+      <span class="tag">RESTful APIs</span>
+    </div>
+  </div>
+
+  <center><a href="index.html" class="back-btn">← العودة للرئيسية</a></center>
+</div>
+
 </body>
 </html>
