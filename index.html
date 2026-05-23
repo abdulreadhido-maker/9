@@ -3,221 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Torrema</title>
+<title>Torrema | الرئيسية</title>
 
 <style>
+:root {
+  --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
+  --secondary: #94a3b8;
+  --bg-dark: #0a0a0c;
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --white: #ffffff;
+}
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
-  scroll-behavior:smooth;
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
 }
 
-body{
-  background:#050816;
-  color:white;
-  overflow-x:hidden;
-}
+body{ background: var(--bg-dark); color: white; overflow-x: hidden; }
 
-/* خلفية تقنية */
 body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:
-    radial-gradient(circle, rgba(0,255,255,0.1) 1px, transparent 1px);
-  background-size:50px 50px;
-  animation:move 25s linear infinite;
-  z-index:-1;
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 204, 0.05), transparent 70%), radial-gradient(circle, rgba(51, 51, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px; z-index: -1;
 }
 
-@keyframes move{
-  from{transform:translate(0,0);}
-  to{transform:translate(-100px,-100px);}
-}
-
-/* NAV */
 nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 30px;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid cyan;
-  z-index:1000;
+  position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 8%; background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color); z-index: 1000;
 }
 
 nav h1{
-  color:cyan;
-  font-size:26px;
+  font-size: 28px; font-weight: 800; background: var(--primary-gradient); background-size: 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s infinite linear;
 }
 
-nav a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  transition:0.3s;
+.nav-links { display: flex; gap: 25px; }
+nav a{ color: var(--secondary); text-decoration: none; font-size: 16px; transition: 0.3s; }
+nav a:hover{ color: var(--white); }
+
+.hero{ height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; }
+.hero-content { max-width: 800px; opacity: 0; animation: fadeInUp 1s ease-out forwards; animation-delay: 0.5s; }
+.hero h1{ font-size: clamp(40px, 8vw, 75px); margin-bottom: 20px; height: 90px; }
+
+/* ستايل الرابط الذي يحول الكرت لزر قابل للضغط */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
-nav a:hover{
-  color:cyan;
-}
-
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:70px;
-  color:cyan;
-  text-shadow:0 0 20px cyan;
-}
-
-.hero p{
-  color:#aaa;
-  margin:15px 0;
-}
-
-/* زر */
-button{
-  padding:12px 25px;
-  background:cyan;
-  border:none;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.3s;
-}
-
-button:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 20px cyan;
-}
-
-/* أقسام */
-section{
-  padding:120px 20px;
-  text-align:center;
-}
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
 
 .card{
-  background:#0f172a;
-  border:1px solid cyan;
-  padding:20px;
-  margin:15px;
-  border-radius:15px;
-  transition:0.3s;
+  background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px 30px;
+  border-radius: 16px; backdrop-filter: blur(6px); transition: all 0.3s ease; text-align: center;
 }
-
 .card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 20px cyan;
+  transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
 }
 
-/* زر رجوع */
-#topBtn{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  display:none;
+.btn-cyber {
+  padding: 14px 35px; background: var(--primary-gradient); background-size: 300%; border: none;
+  border-radius: 50px; color: var(--white); font-weight: 700; cursor: pointer;
+  animation: neonPulse 2s infinite, gradientShift 5s infinite linear;
 }
+
+section{ padding: 100px 8% 60px; }
+section h2 { font-size: 36px; text-align: center; margin-bottom: 50px; }
+
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
-
 <body>
 
-<!-- NAV -->
 <nav>
   <h1>Torrema</h1>
-  <div>
+  <div class="nav-links">
     <a href="#home">الرئيسية</a>
     <a href="#services">الخدمات</a>
-    <a href="#gallery">المعرض</a>
-    <a href="#contact">التواصل</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
-  <div>
-    <h1 id="title">Torrema</h1>
-    <p>موقع إلكتروني تقني بتصميم داكن ومستقبلي</p>
-    <button onclick="start()">ابدأ الآن</button>
+  <div class="hero-content">
+    <h1 id="title"></h1>
+    <p>اضغط على أي خدمة بالأسفل لتنتقل لصفحتها الخاصة الحقيقية.</p>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
-  <h2>الخدمات</h2>
-  <div class="card">تصميم مواقع حديثة</div>
-  <div class="card">برمجة احترافية</div>
-  <div class="card">تجربة مستخدم UI/UX</div>
-</section>
+  <h2>خدماتنا</h2>
+  <div class="grid-container">
+    
+    <!-- كرت 1: ينقل لصفحة web.html -->
+    <a href="web.html" class="card-link">
+      <div class="card">
+        <div style="font-size:35px;">🌐</div>
+        <h3>تصميم مواقع حديثة</h3>
+        <p style="font-size:14px; color:var(--secondary); margin-top:10px;">اضغط هنا لفتح صفحة التصميم الحقيقية</p>
+      </div>
+    </a>
+    
+    <!-- كرت 2: ينقل لصفحة dev.html -->
+    <a href="dev.html" class="card-link">
+      <div class="card">
+        <div style="font-size:35px;">💻</div>
+        <h3>برمجة احترافية</h3>
+        <p style="font-size:14px; color:var(--secondary); margin-top:10px;">اضغط هنا لفتح صفحة البرمجة الحقيقية</p>
+      </div>
+    </a>
+    
+    <!-- كرت 3: ينقل لصفحة uiux.html -->
+    <a href="uiux.html" class="card-link">
+      <div class="card">
+        <div style="font-size:35px;">✨</div>
+        <h3>تجربة مستخدم UI/UX</h3>
+        <p style="font-size:14px; color:var(--secondary); margin-top:10px;">اضغط هنا لفتح صفحة الواجهات الحقيقية</p>
+      </div>
+    </a>
 
-<!-- GALLERY -->
-<section id="gallery">
-  <h2>المعرض الإلكتروني</h2>
-  <div class="card">صور تقنية حديثة</div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>التواصل</h2>
-  <div class="card">
-    <input placeholder="الاسم" style="width:100%;padding:10px;margin:10px 0;">
-    <input placeholder="البريد" style="width:100%;padding:10px;margin:10px 0;">
-    <textarea placeholder="رسالتك" style="width:100%;padding:10px;margin:10px 0;"></textarea>
-    <button>إرسال</button>
   </div>
 </section>
-
-<button id="topBtn" onclick="scrollTopPage()">↑</button>
 
 <script>
-function start(){
-  alert("مرحباً بك في Torrema 🚀");
-}
-
-/* زر الرجوع للأعلى */
-window.onscroll = function(){
-  let btn = document.getElementById("topBtn");
-  if(document.documentElement.scrollTop > 300){
-    btn.style.display = "block";
-  } else {
-    btn.style.display = "none";
-  }
-};
-
-function scrollTopPage(){
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-/* تأثير كتابة */
-let text = "Torrema";
-let i = 0;
-document.getElementById("title").innerHTML = "";
-
+let text = "Torrema"; let i = 0; let titleElement = document.getElementById("title");
 function typing(){
-  if(i < text.length){
-    document.getElementById("title").innerHTML += text[i];
-    i++;
-    setTimeout(typing,150);
-  }
+  if(i < text.length){ titleElement.innerHTML = text.substring(0, i + 1); i++; setTimeout(typing, 200); }
 }
-
-typing();
+window.onload = typing;
 </script>
-
 </body>
 </html>
