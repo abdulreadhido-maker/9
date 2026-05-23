@@ -71,10 +71,6 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
 .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
 .card-wrapper { text-decoration: none; color: inherit; display: block; }
 .card{ background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px 30px; border-radius: 16px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: all 0.3s ease; text-align: center; opacity: 0; animation: fadeInUp 1s ease-out forwards; }
-.grid-container .card-wrapper:nth-child(1) .card { animation-delay: 0.2s; }
-.grid-container .card-wrapper:nth-child(2) .card { animation-delay: 0.4s; }
-.grid-container .card-wrapper:nth-child(3) .card { animation-delay: 0.6s; }
-.card h3 { color: var(--white); font-size: 20px; font-weight: 600; }
 .card:hover{ transform: translateY(-8px); border-color: rgba(255, 255, 255, 0.4); background: rgba(30, 30, 35, 0.8); box-shadow: 0 10px 30px rgba(51, 51, 255, 0.2); }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -121,7 +117,7 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
 
 <section class="hero" id="home">
   <div class="hero-content">
-    <h1 id="title"></h1>
+    <h1 id="title">Torrema</h1>
     <p>بساطة متناهية تعكس دقة العمل. نصنع لك تجارب رقمية فاخرة تعتمد على الأداء العالي والتصميم المينيماليست النظيف.</p>
     <a href="#services" class="btn-cyber" style="text-decoration:none; display:inline-block;">اكتشف خدماتنا</a>
   </div>
@@ -130,87 +126,31 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
 <section id="services">
   <h2>خدماتنا</h2>
   <div class="grid-container">
-    
-    <a href="web.html" class="card-wrapper">
-      <div class="card">
-        <div style="font-size:35px; margin-bottom:15px;">🌐</div>
-        <h3>تصميم مواقع حديثة</h3>
-        <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">واجهات متجاوبة ومتوافقة مع جميع الشاشات المتطورة.</p>
-      </div>
-    </a>
-
-    <a href="dev.html" class="card-wrapper">
-      <div class="card">
-        <div style="font-size:35px; margin-bottom:15px;">💻</div>
-        <h3>برمجة احترافية</h3>
-        <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">بناء برمجيات سريعة، مستقرة، وآمنة تماماً.</p>
-      </div>
-    </a>
-
-    <a href="uiux.html" class="card-wrapper">
-      <div class="card">
-        <div style="font-size:35px; margin-bottom:15px;">✨</div>
-        <h3>تجربة مستخدم UI/UX</h3>
-        <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">هندسة رحلة مستخدم سلسة خالية من التعقيد البصري.</p>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<section id="gallery">
-  <h2>معرض الأعمال</h2>
-  <div class="gallery-grid">
-    <div class="gallery-item">لوحة تحكم مونوكروم [قريباً]</div>
-    <div class="gallery-item">موقع أعمال فاخر [قريباً]</div>
-    <div class="gallery-item">تطبيق الهوية البصرية [قريباً]</div>
+    <div class="card"><h3>تصميم مواقع</h3><p>واجهات متجاوبة وعصرية.</p></div>
+    <div class="card"><h3>برمجة احترافية</h3><p>برمجيات سريعة وآمنة.</p></div>
+    <div class="card"><h3>تجربة مستخدم</h3><p>تصميم رحلة مستخدم سلسة.</p></div>
   </div>
 </section>
 
 <section id="contact">
-  <h2>تواصل معنا حقيقياً</h2>
+  <h2>تواصل معنا</h2>
   <div class="card contact-container">
-    <form action="https://formbold.com/s/zglo7" method="POST">
-      <div class="form-group">
-        <input type="text" name="name" placeholder="الاسم الكريم" required>
-      </div>
-      <div class="form-group">
-        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-      </div>
-      <div class="form-group">
-        <textarea name="message" placeholder="تفاصيل مشروعك أو رسالتك..." required></textarea>
-      </div>
-      <button type="submit" class="btn-cyber" style="width: 100%;">إرسال الرسالة فوراً</button>
+    <form action="https://formsubmit.co/abdulreadhido@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <div class="form-group"><input type="text" name="name" placeholder="الاسم الكريم" required></div>
+      <div class="form-group"><input type="email" name="email" placeholder="البريد الإلكتروني" required></div>
+      <div class="form-group"><textarea name="message" placeholder="تفاصيل مشروعك..." required></textarea></div>
+      <button type="submit" class="btn-cyber" style="width: 100%;">إرسال الرسالة</button>
     </form>
   </div>
 </section>
 
-<button id="topBtn" onclick="scrollTopPage()">↑</button>
+<button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
 <script>
 const mobileMenu = document.getElementById('mobile-menu');
 const navLinks = document.getElementById('nav-links');
-
 mobileMenu.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { navLinks.classList.remove('active'); }); });
-
-window.onscroll = function(){
-  let btn = document.getElementById("topBtn");
-  if(document.documentElement.scrollTop > 400){ btn.style.display = "flex"; } else { btn.style.display = "none"; }
-};
-function scrollTopPage(){ window.scrollTo({top:0, behavior:"smooth"}); }
-
-let text = "Torrema"; let i = 0; let titleElement = document.getElementById("title");
-function typing(){
-  if(i < text.length){
-    titleElement.innerHTML = text.substring(0, i + 1) + '<span style="color:var(--white); animation: blink 0.7s infinite;">|</span>';
-    i++; setTimeout(typing, 200);
-  } else { titleElement.innerHTML = text; }
-}
-const style = document.createElement('style');
-style.innerHTML = '@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }';
-document.head.appendChild(style);
-window.onload = typing;
 </script>
 </body>
 </html>
