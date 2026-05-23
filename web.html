@@ -1,17 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>تصميم مواقع حديثة</title>
-    <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; text-align: center; padding: 100px; }
-        h1 { color: #00ffff; font-size: 40px; }
-        .back-btn { margin-top: 30px; display: inline-block; padding: 10px 20px; background: white; color: black; text-decoration: none; border-radius: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torrema | تصميم مواقع حديثة</title>
+<style>
+:root {
+  --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
+  --secondary: #94a3b8;
+  --bg-dark: #0a0a0c;
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--bg-dark); color: white; padding: 60px 8%; min-height: 100vh; position: relative; }
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05), transparent 70%); z-index: -1;
+}
+.header { text-align: center; margin-bottom: 50px; }
+.header h1 { font-size: 40px; margin-bottom: 15px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; }
+.container { max-width: 900px; margin: 0 auto; }
+.section-box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; margin-bottom: 30px; backdrop-filter: blur(6px); }
+.section-box h2 { color: #00ffff; margin-bottom: 15px; font-size: 22px; }
+ul { list-style: none; }
+ul li { margin-bottom: 12px; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
+ul li::before { content: "⚡"; color: #00ffff; }
+table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+th, td { padding: 12px; text-align: right; border-bottom: 1px solid var(--border-color); }
+th { color: #00ffff; }
+td { color: var(--secondary); }
+.back-btn { display: inline-block; padding: 12px 30px; background: var(--primary-gradient); background-size: 200%; border: none; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: 20px; }
+.back-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3); }
+</style>
 </head>
 <body>
-    <h1>🌐 صفحة تصميم المواقع الحديثة</h1>
-    <p>هذه صفحة مستقلة تماماً (web.html) تشرح تفاصيل تصميم المواقع المتجاوبة.</p>
-    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية</a>
+
+<div class="container">
+  <div class="header">
+    <h1>🌐 تصميم مواقع ويب حديثة ومتجاوبة</h1>
+    <p>نبتكر واجهات رقمية تأسر الأنظار وتضمن تجربة تصفح مثالية على كل الشاشات.</p>
+  </div>
+
+  <div class="section-box">
+    <h2>ماذا نقدم في هذه الخدمة؟</h2>
+    <ul>
+      <li>تصاميم حصرية مخصصة لهوية مشروعك (ليست قوالب جاهزة مكررة).</li>
+      <li>توافق تام بنسبة 100% مع الهواتف الذكية، الأجهزة اللوحية، والشاشات الضخمة.</li>
+      <li>تجهيز الموقع ليكون صديقاً لمحركات البحث (SEO) لضمان ظهورك في غوغل.</li>
+      <li>مواقع ذات سرعة استجابة فائقة بفضل الأكواد النظيفة والمضغوطة.</li>
+    </ul>
+  </div>
+
+  <div class="section-box">
+    <h2>باقات الأسعار التقريبية</h2>
+    <table>
+      <tr>
+        <th>نوع الموقع</th>
+        <th>المميزات</th>
+        <th>مدة التنفيذ</th>
+      </tr>
+      <tr>
+        <td>صفحة هبوط (Landing Page)</td>
+        <td>صفحة واحدة تعريفية للمنتج أو الخدمة</td>
+        <td>3 - 5 أيام</td>
+      </tr>
+      <tr>
+        <td>موقع شركات متكامل</td>
+        <td>حتى 5 صفحات (الرئيسية، من نحن، خدماتنا، اتصل بنا)</td>
+        <td>7 - 12 يوم</td>
+      </tr>
+    </table>
+  </div>
+
+  <center><a href="index.html" class="back-btn">← العودة للرئيسية</a></center>
+</div>
+
 </body>
 </html>
