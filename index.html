@@ -139,3 +139,527 @@ window.onload = typing;
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torrema | الفخامة والألوان</title>
+
+<style>
+:root {
+  /* تدرج الألوان الجديد: تدرج متحرك للأزرار والنيون */
+  --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
+  --secondary: #94a3b8;
+  --bg-dark: #0a0a0c;
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --text-muted: #64748b;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --white: #ffffff;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body{
+  background: var(--bg-dark);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* خلفية تقنية شبكية تم تعديلها لتتناسب مع الألوان الجديدة */
+body::before{
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(255, 0, 204, 0.05), transparent 70%),
+    radial-gradient(circle, rgba(51, 51, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px;
+  z-index: -1;
+}
+
+/* القائمة العلوية */
+nav{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: rgba(10, 10, 12, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+}
+
+nav h1{
+  font-size: 28px;
+  font-weight: 800;
+  /* تطبيق التدرج الملون على الشعار */
+  background: var(--primary-gradient);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s infinite linear;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+nav a{
+  color: var(--secondary);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 2px;
+  bottom: -5px; right: 0;
+  background: var(--white); /* الحفاظ على خط الحوام أبيض */
+  transition: 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a:hover{
+  color: var(--white);
+}
+
+/* زر القائمة للهواتف */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.menu-toggle span {
+  width: 25px; height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* الواجهة الرئيسية */
+.hero{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-content {
+  max-width: 800px;
+  /* إضافة تأثير دخول للمحتوى */
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 0.5s; /* تأخير الدخول ليظهر بعد الخلفية */
+}
+
+.hero h1{
+  font-size: clamp(40px, 8vw, 75px);
+  font-weight: 800;
+  color: var(--white);
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+  height: 90px;
+}
+
+.hero p{
+  color: var(--secondary);
+  font-size: clamp(16px, 3vw, 20px);
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* الأزرار الملونة بالتدرج */
+.btn-cyber {
+  padding: 14px 35px;
+  /* تطبيق التدرج الملون */
+  background: var(--primary-gradient);
+  background-size: 300%;
+  border: none;
+  border-radius: 50px;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease, background-position 0.5s ease;
+  box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3);
+  /* تأثير وميض نيون */
+  animation: neonPulse 2s infinite, gradientShift 5s infinite linear;
+}
+
+.btn-cyber:hover{
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.5);
+}
+
+/* الأقسام العادية */
+section{
+  padding: 100px 8% 60px;
+}
+
+section h2 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  color: var(--white);
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px; left: 50%;
+  transform: translateX(-50%);
+  width: 40px; height: 2px;
+  /* تطبيق التدرج الملون على الخط */
+  background: var(--primary-gradient);
+  background-size: 300%;
+  animation: gradientShift 5s infinite linear;
+}
+
+/* شبكة الخدمات والمعرض */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.card{
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 40px 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+  text-align: center;
+  /* إضافة تأثير دخول خفيف للكروت */
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* تأثيرات دخول متتابعة للكروت */
+.grid-container .card:nth-child(1) { animation-delay: 1s; }
+.grid-container .card:nth-child(2) { animation-delay: 1.2s; }
+.grid-container .card:nth-child(3) { animation-delay: 1.4s; }
+
+.card h3 {
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card:hover{
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(30, 30, 35, 0.8);
+  /* تأثير ظل ملون عند الحوام */
+  box-shadow: 0 10px 30px rgba(51, 51, 255, 0.2);
+}
+
+/* ستايل معرض الصور المصغر */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  height: 250px;
+  background: linear-gradient(135deg, #16161a, #232329);
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.gallery-item:hover {
+  border-color: var(--white);
+  color: var(--white);
+  /* تأثير ظل ملون عند الحوام */
+  box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+}
+
+/* قسم التواصل */
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--white);
+}
+
+.form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+/* زر العودة للأعلى الدائري الملون */
+#topBtn{
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 50px; height: 50px;
+  /* تطبيق التدرج الملون */
+  background: var(--primary-gradient);
+  background-size: 300%;
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(255, 0, 204, 0.4);
+  transition: 0.3s;
+  z-index: 99;
+  animation: gradientShift 5s infinite linear;
+}
+
+#topBtn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.6);
+}
+
+/* شاشات الهواتف */
+@media (max-width: 768px) {
+  nav { padding: 15px 5%; }
+  .menu-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 70px; left: 0;
+    width: 100%; height: 0;
+    background: rgba(10, 10, 12, 0.98);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.4s ease;
+    border-bottom: 0px solid var(--border-color);
+  }
+  .nav-links.active {
+    height: 250px;
+    border-bottom-width: 1px;
+  }
+  section { padding: 80px 5% 40px; }
+}
+
+/* --- التحريكات (Animations) --- */
+
+/* 1. تأثير حركة التدرج الملون */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. تأثير دخول (تلاشي للأعلى) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. تأثير وميض نيون للأزرار */
+@keyframes neonPulse {
+  0% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3); }
+  50% { box-shadow: 0 4px 30px rgba(0, 255, 255, 0.6), 0 0 10px rgba(255, 0, 204, 0.4); }
+  100% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3); }
+}
+
+/* 4. وميض المؤشر لتأثير الكتابة (تم نقله هنا) */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <h1>Torrema</h1>
+  <div class="menu-toggle" id="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#home">الرئيسية</a>
+    <a href="#services">الخدمات</a>
+    <a href="#gallery">المعرض</a>
+    <a href="#contact">التواصل</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1 id="title"></h1>
+    <p>بساطة متناهية تعكس دقة العمل. نصنع لك تجارب رقمية فاخرة تعتمد على الأداء العالي والتصميم المينيماليست النظيف.</p>
+    <button class="btn-cyber" onclick="start()">ابدأ الآن</button>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>خدماتنا</h2>
+  <div class="grid-container">
+    <div class="card">
+      <div style="font-size:35px; margin-bottom:15px; filter: grayscale(100%);">🌐</div>
+      <h3>تصميم مواقع حديثة</h3>
+      <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">واجهات متجاوبة ومتوافقة مع جميع الشاشات المتطورة.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:35px; margin-bottom:15px; filter: grayscale(100%);">💻</div>
+      <h3>برمجة احترافية</h3>
+      <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">بناء برمجيات سريعة، مستقرة، وآمنة تماماً.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:35px; margin-bottom:15px; filter: grayscale(100%);">✨</div>
+      <h3>تجربة مستخدم UI/UX</h3>
+      <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;">هندسة رحلة مستخدم سلسة خالية من التعقيد البصري.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h2>معرض الأعمال</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">لوحة تحكم مونوكروم [قريباً]</div>
+    <div class="gallery-item">موقع أعمال فاخر [قريباً]</div>
+    <div class="gallery-item">تطبيق الهوية البصرية [قريباً]</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>تواصل معنا</h2>
+  <div class="card contact-container">
+    <form onsubmit="event.preventDefault(); alert('تم استلام رسالتك بنجاح! 👍');">
+      <div class="form-group">
+        <input type="text" placeholder="الاسم الكريم" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="البريد الإلكتروني" required>
+      </div>
+      <div class="form-group">
+        <textarea placeholder="تفاصيل مشروعك أو رسالتك..." required></textarea>
+      </div>
+      <button type="submit" class="btn-cyber" style="width: 100%;">إرسال الرسالة</button>
+    </form>
+  </div>
+</section>
+
+<button id="topBtn" onclick="scrollTopPage()">↑</button>
+
+<script>
+function start(){
+  alert("مرحباً بك في عالم Torrema المتجدد 🖤");
+}
+
+/* القائمة الذكية للهواتف */
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('nav-links');
+
+mobileMenu.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
+
+/* زر الرجوع للأعلى المحسن */
+window.onscroll = function(){
+  let btn = document.getElementById("topBtn");
+  if(document.documentElement.scrollTop > 400){
+    btn.style.display = "flex";
+  } else {
+    btn.style.display = "none";
+  }
+};
+
+function scrollTopPage(){
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* تأثير كتابة احترافي مع مؤشر وامض */
+let text = "Torrema";
+let i = 0;
+let titleElement = document.getElementById("title");
+
+function typing(){
+  if(i < text.length){
+    /* استخدام اللون الأبيض للمؤشر والكتابة */
+    titleElement.innerHTML = text.substring(0, i + 1) + '<span style="color:var(--white); animation: blink 0.7s infinite;">|</span>';
+    i++;
+    setTimeout(typing, 200);
+  } else {
+    titleElement.innerHTML = text;
+  }
+}
+
+/* تم نقل الستايل الخاص بـ blink إلى CSS */
+
+window.onload = typing;
+</script>
+
+</body>
+</html>
