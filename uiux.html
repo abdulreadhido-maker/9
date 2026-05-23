@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>تجربة مستخدم UI/UX</title>
-    <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; text-align: center; padding: 100px; }
-        h1 { color: #3333ff; font-size: 40px; }
-        .back-btn { margin-top: 30px; display: inline-block; padding: 10px 20px; background: white; color: black; text-decoration: none; border-radius: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torrema | تجربة المستخدم UI/UX</title>
+<style>
+:root {
+  --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
+  --secondary: #94a3b8;
+  --bg-dark: #0a0a0c;
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--bg-dark); color: white; padding: 60px 8%; min-height: 100vh; }
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(51, 51, 255, 0.05), transparent 70%); z-index: -1;
+}
+.header { text-align: center; margin-bottom: 50px; }
+.header h1 { font-size: 40px; margin-bottom: 15px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; }
+.container { max-width: 900px; margin: 0 auto; }
+.section-box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; margin-bottom: 30px; backdrop-filter: blur(6px); }
+.section-box h2 { color: #3333ff; margin-bottom: 15px; font-size: 22px; }
+.steps { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+.step { display: flex; gap: 15px; align-items: flex-start; }
+.step-num { background: #3333ff; color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; flex-shrink: 0; }
+.step-text h3 { font-size: 16px; color: var(--white); margin-bottom: 4px; }
+.step-text p { font-size: 14px; color: var(--secondary); }
+.back-btn { display: inline-block; padding: 12px 30px; background: var(--primary-gradient); background-size: 200%; border: none; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: 20px; }
+.back-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(51, 51, 255, 0.3); }
+</style>
 </head>
 <body>
-    <h1>✨ صفحة تجربة المستخدم UI/UX</h1>
-    <p>هذه صفحة مستقلة تماماً (uiux.html) تهتم بدراسة وتصميم رحلة العميل البصرية.</p>
-    <a href="index.html" class="back-btn">← العودة للصفحة الرئيسية</a>
+
+<div class="container">
+  <div class="header">
+    <h1>✨ هندسة واجهات وتجربة المستخدم UI/UX</h1>
+    <p>ندرس سلوك العميل لنصنع رحلة تصفح سلسة وممتعة ترفع من نسبة مبيعات موقعك.</p>
+  </div>
+
+  <div class="section-box">
+    <h2>لماذا تهتم بـ UI/UX لموقعك؟</h2>
+    <p style="color: var(--secondary); line-height: 1.6;">التصميم الجميل لا يكفي إذا كان العميل يجد صعوبة في الوصول لزر الشراء أو التسجيل. نحن نهتم بأدق التفاصيل مثل أماكن الأزرار، وتناسق الألوان النفسي، وسهولة القراءة لضمان بقاء الزائر أطول فترة ممكنة في الموقع.</p>
+  </div>
+
+  <div class="section-box">
+    <h2>مراحل العمل الفني لدينا</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>البحث ودراسة المنافسين (UX Research)</h3>
+          <p>نفهم طبيعة جمهورك المستهدف وما يفضله في المواقع المنافسة.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>رسم الهيكل السلكي (Wireframing)</h3>
+          <p>تخطيط أولي بالقلم أو برمجياً لأماكن العناصر قبل البدء بالتلوين.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>التصميم البصري النهائي (UI Design)</h3>
+          <p>رسم الواجهات بكامل فخامتها وألوانها عبر برنامج Figma الشهير.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <center><a href="index.html" class="back-btn">← العودة للرئيسية</a></center>
+</div>
+
 </body>
 </html>
