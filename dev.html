@@ -7,64 +7,73 @@
 <style>
 :root {
   --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
-  --secondary: #94a3b8;
   --bg-dark: #0a0a0c;
-  --card-bg: rgba(25, 25, 28, 0.6);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --white: #ffffff;
+  --card-bg: rgba(25, 25, 28, 0.7);
+  --border-color: rgba(255, 0, 204, 0.2);
+  --text-sec: #94a3b8;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-body { background: var(--bg-dark); color: white; padding: 60px 8%; min-height: 100vh; }
-body::before {
-  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 204, 0.05), transparent 70%); z-index: -1;
-}
-.header { text-align: center; margin-bottom: 50px; }
-.header h1 { font-size: 40px; margin-bottom: 15px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; }
-.container { max-width: 900px; margin: 0 auto; }
-.section-box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; margin-bottom: 30px; backdrop-filter: blur(6px); }
-.section-box h2 { color: #ff00cc; margin-bottom: 15px; font-size: 22px; }
-.tech-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-.tag { background: rgba(255, 0, 204, 0.1); border: 1px solid rgba(255, 0, 204, 0.3); padding: 6px 15px; border-radius: 20px; color: #ff00cc; font-size: 14px; font-weight: bold; }
-ul { list-style: none; }
-ul li { margin-bottom: 12px; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
-ul li::before { content: "🛡️"; }
-.back-btn { display: inline-block; padding: 12px 30px; background: var(--primary-gradient); background-size: 200%; border: none; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: 20px; }
-.back-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 204, 0.3); }
+body { background: var(--bg-dark); color: white; padding: 40px 5%; min-height: 100vh; }
+.container { max-width: 800px; margin: 0 auto; }
+.header { text-align: center; margin-bottom: 40px; }
+.header h1 { font-size: 35px; margin-bottom: 10px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200%; }
+.box { background: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; margin-bottom: 25px; }
+h2 { color: #ff00cc; font-size: 20px; margin-bottom: 15px; }
+p { color: var(--text-sec); line-height: 1.6; font-size: 15px; margin-bottom: 15px; }
+
+/* أداة المحاكاة البرمجية */
+.terminal { background: #050508; border: 1px solid #ff00cc; border-radius: 8px; padding: 20px; font-family: 'Courier New', monospace; color: #00ff00; min-height: 120px; margin-top: 15px; white-space: pre-line; font-size: 14px; }
+.action-btn { background: #ff00cc; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; margin-left: 10px; }
+.action-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-sec { background: #3333ff; }
+
+.back-btn { display: inline-block; padding: 12px 35px; background: var(--primary-gradient); border: none; border-radius: 50px; color: white; text-decoration: none; font-weight: bold; transition: 0.3s; margin-top: 20px; }
+.back-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(255, 0, 204, 0.3); }
 </style>
 </head>
 <body>
 
 <div class="container">
   <div class="header">
-    <h1>💻 برمجة وتطوير النظم والمنصات</h1>
-    <p>نبني العقول الخلفية للمواقع بأحدث التقنيات لضمان السرعة، الاستقرار، والأمان المطلق.</p>
+    <h1>💻 محاكي البرمجة النظيفة والأمان</h1>
+    <p>برمجتنا ترتكز على القوة والأمان. اختبر بنفسك أدناه كيف تعمل أنظمتنا البرمجية الخلفية لحمايتك.</p>
   </div>
 
-  <div class="section-box">
-    <h2>معايير جودة الكود لدينا</h2>
-    <ul>
-      <li>حماية قصوى ضد ثغرات الاختراق الشهيرة (SQL Injection & XSS).</li>
-      <li>قواعد بيانات منظمة ومحسنة تتحمل آلاف الزوار في نفس الدقيقة دون بطء.</li>
-      <li>لوحة تحكم سهلة باللغة العربية لإدارة محتوى موقعك بالكامل بدون خبرة برمجية.</li>
-      <li>ربط آمن مع بوابات الدفع الإلكتروني (مدى، فيزا، ماستر كارد، تمارا).</li>
-    </ul>
+  <!-- الأداة المساعدة التفاعلية للمحاكاة الكود -->
+  <div class="box">
+    <h2>🛡️ لوحة اختبار جودة الأكواد وحمايتها (تفاعلية)</h2>
+    <p>اضغط على الأزرار بالأسفل لتجعل النظام يحاكي عملية فحص الثغرات وسرعة استجابة السيرفر المبرمج لدينا:</p>
+    
+    <button class="action-btn" onclick="runSecurityCheck()">🧪 فحص ثغرات الاختراق</button>
+    <button class="action-btn btn-sec" onclick="runSpeedTest()">⚡ فحص سرعة معالجة البيانات</button>
+
+    <div class="terminal" id="console-output">> مستعد لبدء الفحص والمساعدة... يرجى الضغط على أحد الأزرار بالأعلى لرؤية النتيجة المباشرة لكيفية معالجتنا للبيانات.</div>
   </div>
 
-  <div class="section-box">
-    <h2>التقنيات الحديثة التي نعتمد عليها:</h2>
-    <p style="color: var(--secondary); font-size: 15px;">نحن لا نستخدم أدوات قديمة، بل نعتمد على بيئات عمل ذكية تضمن للموقع الاستمرار لسنوات:</p>
-    <div class="tech-tags">
-      <span class="tag">Node.js</span>
-      <span class="tag">React.js</span>
-      <span class="tag">Python / Django</span>
-      <span class="tag">MongoDB / MySQL</span>
-      <span class="tag">RESTful APIs</span>
-    </div>
+  <div class="box">
+    <h2>ℹ️ لماذا هذه الخطوات مهمة لك؟</h2>
+    <p>المواقع العادية تنهار أو تصبح بطيئة جداً عندما يدخلها 100 شخص في نفس الوقت، البرمجة الخاصة التي نعتمد عليها تضمن بقاء موقعك سريعاً ومحمياً من أي هجمات خبيثة قد تضر ببيانات عملائك.</p>
   </div>
 
   <center><a href="index.html" class="back-btn">← العودة للرئيسية</a></center>
 </div>
 
+<script>
+function runSecurityCheck() {
+  let output = document.getElementById('console-output');
+  output.style.color = "#00ff00";
+  output.innerText = "> جاري بدء اختبار الأمان الاختراقي...\n";
+  setTimeout(() => { output.innerText += "> فحص جدار الحماية وقاعدة البيانات ضد هجمات SQL Injection...\n"; }, 500);
+  setTimeout(() => { output.innerText += "> [نجاح]: لم يتم العثور على أي ثغرات. الكود مشفر ومحمي بالكامل 100%!"; }, 1200);
+}
+
+function runSpeedTest() {
+  let output = document.getElementById('console-output');
+  output.style.color = "#00ffff";
+  output.innerText = "> جاري إرسال 5000 طلب وهمي في نفس الثانية للسيرفر لمعاينة السرعة...\n";
+  setTimeout(() => { output.innerText += "> جاري قياس زمن استجابة الـ APIs برمجياً...\n"; }, 500);
+  setTimeout(() => { output.innerText += "> [ممتاز]: زمن الاستجابة هو 42ms فقط (أسرع من 95% من مواقع الإنترنت التقليدية)."; }, 1200);
+}
+</script>
 </body>
 </html>
