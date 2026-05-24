@@ -11,67 +11,77 @@
 :root {
   --primary-gradient: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff, #ff00cc);
   --bg-dark: #0a0a0c;
-  --card-bg: rgba(25, 25, 28, 0.4);
-  --border-color: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(25, 25, 28, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
   --white: #ffffff;
   --text-main: #ffffff;
   --secondary: #94a3b8;
-  --nav-bg: rgba(10, 10, 12, 0.7);
+  --nav-bg: rgba(10, 10, 12, 0.8);
   --price-color: #00ffff;
-  --shadow-glow: rgba(255, 0, 204, 0.2);
+  --blur-amount: 0px;
 }
 
 [data-theme="light"] {
   --bg-dark: #f8fafc;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(0, 0, 0, 0.06);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(0, 0, 0, 0.08);
   --white: #0f172a;
   --text-main: #0f172a;
   --secondary: #475569;
-  --nav-bg: rgba(248, 250, 252, 0.75);
+  --nav-bg: rgba(248, 250, 252, 0.85);
   --price-color: #3333ff;
-  --shadow-glow: rgba(51, 51, 255, 0.1);
 }
 
 *{
   margin: 0; padding: 0; box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
   scroll-behavior: smooth;
-  transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              border-color 0.4s ease;
 }
 
-body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; position: relative; }
-
-/* لوحة جزيئات الخلفية */
-#bg-canvas {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1; pointer-events: none; opacity: 0.6;
+body { 
+  background: var(--bg-dark); 
+  color: var(--text-main); 
+  overflow-x: hidden;
+  filter: blur(var(--blur-amount));
+  transition: filter 0.4s ease, background 0.5s ease, color 0.5s ease;
 }
 
-/* شاشة اللودنج الفاخرة */
+body::before {
+  content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 204, 0.03), transparent 70%); z-index: -1;
+}
+
+/* 🎬 شاشة اللودنج السينمائية المستقرة */
 #loading-screen {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: #0a0a0c; z-index: 9999; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  background: #050507; z-index: 9999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; transition: opacity 0.4s ease;
 }
-.loader {
-  width: 60px; height: 60px; border: 3px solid rgba(255, 255, 255, 0.05);
-  border-bottom-color: #ff00cc; border-top-color: #00ffff; border-radius: 50%;
-  display: inline-block; animation: rotation 0.8s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite; margin-bottom: 20px;
+.progress-bar-container {
+  width: 200px; height: 3px; background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px; overflow: hidden; position: relative; margin-top: 20px;
 }
-#loading-screen p { color: #ffffff; font-size: 16px; font-weight: 500; letter-spacing: 1px; animation: pulseText 1.5s infinite ease-in-out; }
+.progress-line {
+  width: 100%; height: 100%; background: var(--primary-gradient);
+  background-size: 300%; position: absolute; left: -100%;
+  animation: loadAdvance 1.2s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+}
+#loading-screen h2 {
+  font-size: 42px; font-weight: 900; background: var(--primary-gradient); background-size: 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: logoPulse 1.5s infinite ease-in-out, gradientShift 5s infinite linear;
+  letter-spacing: 2px;
+}
 
-/* شريط الملاحة */
+/* شريط الملاحة العلوي */
 nav {
   position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;
-  padding: 15px 8%; background: var(--nav-bg); backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); z-index: 1000;
-  transition: padding 0.3s ease, background 0.3s ease;
+  padding: 20px 8%; background: var(--nav-bg); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); z-index: 1000;
 }
-nav.scrolled { padding: 10px 8%; background: var(--nav-bg); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
 nav h1 {
   font-size: 28px; font-weight: 800; background: var(--primary-gradient); background-size: 300%;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s infinite linear;
@@ -79,101 +89,116 @@ nav h1 {
 .nav-right { display: flex; align-items: center; gap: 20px; }
 .nav-links { display: flex; gap: 25px; }
 nav a { color: var(--secondary); text-decoration: none; font-size: 16px; font-weight: 500; position: relative; transition: color 0.3s; }
-nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; right: 0; background: var(--white); transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; right: 0; background: var(--white); transition: 0.3s ease; }
 nav a:hover::after { width: 100%; }
 nav a:hover { color: var(--white); }
+
+/* زر القائمة للهواتف */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-toggle span {
+  width: 25px; height: 3px; background: var(--text-main); border-radius: 2px; transition: 0.3s;
+}
 
 .controls-btn { display: flex; gap: 10px; align-items: center; }
 .btn-toggle {
   background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main);
-  padding: 8px 16px; border-radius: 30px; cursor: pointer; font-size: 14px; font-weight: 600;
-  display: flex; align-items: center; gap: 5px; transition: all 0.3s ease;
-  backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  padding: 8px 14px; border-radius: 30px; cursor: pointer; font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; gap: 5px; transition: transform 0.2s, border-color 0.3s;
 }
-.btn-toggle:hover { border-color: #ff00cc; transform: translateY(-2px); box-shadow: 0 5px 15px var(--shadow-glow); }
+.btn-toggle:hover { border-color: #ff00cc; transform: scale(1.05); }
 
 /* واجهات العرض */
-.hero { height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 0 20px; position: relative; }
-.hero-content { max-width: 800px; z-index: 2; }
-.hero h1 { font-size: clamp(45px, 8vw, 80px); font-weight: 850; color: var(--white); text-shadow: 0 0 40px rgba(255, 255, 255, 0.05); margin-bottom: 25px; display: inline-block; min-height: 1.2em; }
-.hero p { color: var(--secondary); font-size: clamp(16px, 2.5vw, 20px); margin-bottom: 40px; line-height: 1.8; }
+.hero { height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+.hero-content { max-width: 800px; }
+.hero h1 { font-size: clamp(40px, 8vw, 75px); font-weight: 800; color: var(--white); text-shadow: 0 0 30px rgba(255, 255, 255, 0.1); margin-bottom: 20px; display: inline-block; min-height: 1.2em; }
+.hero p { color: var(--secondary); font-size: clamp(16px, 3vw, 20px); margin-bottom: 35px; line-height: 1.6; }
 
 .btn-cyber {
-  padding: 16px 38px; background: var(--primary-gradient); background-size: 300%; border: none;
+  padding: 14px 35px; background: var(--primary-gradient); background-size: 300%; border: none;
   border-radius: 50px; color: #ffffff; font-size: 16px; font-weight: 700; cursor: pointer;
-  box-shadow: 0 4px 20px rgba(255, 0, 204, 0.25); animation: neonPulse 2s infinite, gradientShift 5s infinite linear;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3); animation: neonPulse 2s infinite, gradientShift 5s infinite linear;
 }
-.btn-cyber:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 255, 255, 0.4), 0 0 15px rgba(255, 0, 204, 0.3); }
 
-section { padding: 120px 8% 80px; opacity: 0; transform: translateY(50px); transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1); }
-section.in-view { opacity: 1; transform: translateY(0); }
-section h2 { font-size: 38px; text-align: center; margin-bottom: 60px; position: relative; color: var(--white); font-weight: 800; }
-section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; border-radius: 2px; background: var(--primary-gradient); background-size: 300%; animation: gradientShift 5s infinite linear; }
+section { padding: 100px 8% 60px; opacity: 0; transform: translateY(50px); filter: blur(5px); transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1), filter 0.9s ease; }
+section.in-view { opacity: 1; transform: translateY(0); filter: blur(0px); }
+section h2 { font-size: 36px; text-align: center; margin-bottom: 50px; position: relative; color: var(--white); }
+section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 40px; height: 2px; background: var(--primary-gradient); background-size: 300%; animation: gradientShift 5s infinite linear; }
 
-/* كروت الخدمات الميكانيكية التفاعلية */
+/* كروت الخدمات */
 .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
-.card-wrapper { text-decoration: none; color: inherit; display: block; perspective: 1000px; }
-.card { 
-  background: var(--card-bg); border: 1px solid var(--border-color); padding: 45px 35px; border-radius: 20px; 
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); text-align: center;
-  transition: transform 0.1s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-  transform-style: preserve-3d; position: relative;
-}
-.card * { transform: translateZ(20px); } /* يعطي عمق ثلاثي الأبعاد للعناصر داخل الكرت */
-.card:hover { border-color: rgba(255, 0, 204, 0.5); box-shadow: 0 15px 35px var(--shadow-glow); }
+.card-wrapper { text-decoration: none; color: inherit; display: block; }
+.card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 40px 30px; border-radius: 16px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); text-align: center; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s; }
+.card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(255, 0, 204, 0.5); box-shadow: 0 15px 35px rgba(51, 51, 255, 0.2); }
 
-/* كروت الأسعار */
 .price-tag-old { text-decoration: line-through; color: var(--secondary); font-size: 14px; margin-left: 5px; }
-.price-tag-new { color: var(--price-color); font-size: 26px; font-weight: 800; }
-.offer-badge { background: linear-gradient(90deg, #ff00cc, #3333ff); color: white; padding: 5px 14px; font-size: 12px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(255, 0, 204, 0.2); }
+.price-tag-new { color: var(--price-color); font-size: 24px; font-weight: 800; }
+.offer-badge { background: #ff00cc; color: white; padding: 4px 10px; font-size: 11px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
 
-/* معرض الأعمال */
+/* المعرض */
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-.gallery-item { height: 280px; border: 1px solid var(--border-color); border-radius: 18px; position: relative; overflow: hidden; cursor: pointer; background: #16161a; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+.gallery-item { height: 260px; border: 1px solid var(--border-color); border-radius: 15px; position: relative; overflow: hidden; cursor: pointer; background: #16161a; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .gallery-item:hover img { transform: scale(1.08); }
-.gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 30%, rgba(10, 10, 12, 0.1)); display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; opacity: 0; transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 20%, rgba(10, 10, 12, 0.2)); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; opacity: 0; transition: opacity 0.4s ease; backdrop-filter: blur(3px); }
 .gallery-item:hover .gallery-overlay { opacity: 1; }
 
 /* التواصل */
 .contact-container { max-width: 600px; margin: 0 auto; }
-.under-development-tag { background: rgba(255, 0, 204, 0.05); border: 1px dashed #ff00cc; padding: 14px; border-radius: 12px; text-align: center; color: #ff00cc; font-weight: 600; font-size: 14px; margin-bottom: 25px; }
+.under-development-tag { background: rgba(255, 0, 204, 0.08); border: 1px dashed #ff00cc; padding: 12px; border-radius: 12px; text-align: center; color: #ff00cc; font-weight: 600; font-size: 14px; margin-bottom: 20px; }
 .form-group { margin-bottom: 20px; }
-.form-group input, .form-group textarea { width: 100%; padding: 16px 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-size: 15px; outline: none; transition: all 0.3s ease; }
-.form-group input:focus, .form-group textarea:focus { border-color: #ff00cc; box-shadow: 0 0 15px rgba(255, 0, 204, 0.15); background-color: rgba(25, 25, 28, 0.8); }
+.form-group input, .form-group textarea { width: 100%; padding: 16px 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-size: 15px; outline: none; }
+.form-group input:focus, .form-group textarea:focus { border-color: #ff00cc; box-shadow: 0 0 10px rgba(255, 0, 204, 0.2); }
 .form-group textarea { height: 150px; resize: vertical; }
 
-#topBtn{ position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--primary-gradient); background-size: 300%; border: none; border-radius: 50%; color: #ffffff; font-size: 22px; font-weight: bold; cursor: pointer; opacity: 0; pointer-events: none; display: flex; justify-content: center; align-items: center; z-index: 99; animation: gradientShift 5s infinite linear; transition: opacity 0.3s ease, transform 0.3s ease; }
-#topBtn.visible { opacity: 1; pointer-events: auto; }
-#topBtn:hover { transform: translateY(-5px); }
+#topBtn{ position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--primary-gradient); background-size: 300%; border: none; border-radius: 50%; color: #ffffff; font-size: 22px; font-weight: bold; cursor: pointer; display: none; justify-content: center; align-items: center; z-index: 99; animation: gradientShift 5s infinite linear; }
 
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes loadAdvance { 0% { left: -100%; width: 30%; } 50% { left: 20%; width: 60%; } 100% { left: 100%; width: 100%; } }
+@keyframes logoPulse { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255,0,204,0.3)); } 50% { transform: scale(1.03); filter: drop-shadow(0 0 25px rgba(0,255,255,0.6)); } }
 @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-@keyframes neonPulse { 0% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.25); } 50% { box-shadow: 0 4px 30px rgba(0, 255, 255, 0.5), 0 0 15px rgba(255, 0, 204, 0.3); } 100% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.25); } }
+@keyframes neonPulse { 0% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3); } 50% { box-shadow: 0 4px 30px rgba(0, 255, 255, 0.6), 0 0 10px rgba(255, 0, 204, 0.4); } 100% { box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3); } }
+
+/* التجاوب مع الهواتف المحمولة */
+@media (max-width: 768px) {
+  nav { padding: 15px 5%; }
+  .menu-toggle { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%;
+    background: var(--bg-dark); border-bottom: 1px solid var(--border-color); padding: 20px; gap: 15px; text-align: center;
+  }
+  .nav-links.active { display: flex; }
+  .nav-right { gap: 10px; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- كانفاس جزيئات الخلفية المضافة حديثاً -->
-<canvas id="bg-canvas"></canvas>
-
 <div id="loading-screen">
-  <span class="loader"></span>
-  <p id="load-txt">جاري تحميل منصة Torrema...</p>
+  <h2>Torrema</h2>
+  <div class="progress-bar-container">
+    <div class="progress-line"></div>
+  </div>
 </div>
 
-<nav id="navbar">
+<nav>
   <h1 id="nav-logo">Torrema</h1>
   <div class="nav-right">
+    <button class="menu-toggle" id="menu-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links" id="nav-links">
-      <a href="#home" id="lnk-home" class="page-link">الرئيسية</a>
-      <a href="#services" id="lnk-services" class="page-link">الخدمات</a>
-      <a href="#pricing" id="lnk-pricing" class="page-link">الأسعار</a>
-      <a href="#gallery" id="lnk-gallery" class="page-link">المعرض</a>
-      <a href="#contact" id="lnk-contact" class="page-link">التواصل</a>
+      <a href="#home" id="lnk-home" class="internal-link">الرئيسية</a>
+      <a href="#services" id="lnk-services" class="internal-link">الخدمات</a>
+      <a href="#pricing" id="lnk-pricing" class="internal-link">الأسعار</a>
+      <a href="#gallery" id="lnk-gallery" class="internal-link">المعرض</a>
+      <a href="#contact" id="lnk-contact" class="internal-link">التواصل</a>
     </div>
     <div class="controls-btn">
       <button class="btn-toggle" id="theme-btn" onclick="toggleTheme()">🌙 داكن</button>
@@ -186,29 +211,29 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
   <div class="hero-content">
     <h1 id="title">Torrema</h1>
     <p id="hero-p">أهلاً بك في منصة Torrema لتطوير الحلول البرمجية الذكية وتصميم المواقع الإلكترونية.</p>
-    <a href="#services" class="btn-cyber" id="hero-btn" style="text-decoration:none; display:inline-block;">اكتشف خدماتنا</a>
+    <a href="#services" class="btn-cyber internal-link" id="hero-btn" style="text-decoration:none; display:inline-block;">اكتشف خدماتنا</a>
   </div>
 </section>
 
 <section id="services">
   <h2 id="sec-services-title">خدماتنا</h2>
   <div class="grid-container">
-    <a href="web.html" class="card-wrapper page-link">
-      <div class="card tilt-card">
+    <a href="web.html" class="card-wrapper external-link" rel="noopener noreferrer">
+      <div class="card">
         <div style="font-size:35px; margin-bottom:15px;">🌐</div>
         <h3 id="srv1-title">تصميم مواقع</h3>
         <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;" id="srv1-desc">واجهات متجاوبة ومتوافقة مع جميع الشاشات المتطورة.</p>
       </div>
     </a>
-    <a href="dev.html" class="card-wrapper page-link">
-      <div class="card tilt-card">
+    <a href="dev.html" class="card-wrapper external-link" rel="noopener noreferrer">
+      <div class="card">
         <div style="font-size:35px; margin-bottom:15px;">💻</div>
         <h3 id="srv2-title">برمجة احترافية</h3>
         <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;" id="srv2-desc">بناء برمجيات سريعة، مستقرة، وآمنة تماماً.</p>
       </div>
     </a>
-    <a href="uiux.html" class="card-wrapper page-link">
-      <div class="card tilt-card">
+    <a href="uiux.html" class="card-wrapper external-link" rel="noopener noreferrer">
+      <div class="card">
         <div style="font-size:35px; margin-bottom:15px;">✨</div>
         <h3 id="srv3-title">تجربة مستخدم UI/UX</h3>
         <p style="font-size:14px; color:var(--secondary); font-weight:400; margin-top:10px;" id="srv3-desc">هندسة رحلة مستخدم سلسة خالية من التعقيد البصري.</p>
@@ -220,7 +245,7 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
 <section id="pricing">
   <h2 id="sec-price-title">باقاتنا وعروضنا</h2>
   <div class="grid-container">
-    <div class="card tilt-card">
+    <div class="card">
       <span class="offer-badge" id="badge-discount">خصم 40% لفترة محدودة</span>
       <h3 id="p1-title">موقع تعريفي / هبوط</h3>
       <div style="margin: 15px 0;">
@@ -229,7 +254,7 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
       </div>
       <p style="font-size:13px; color:var(--secondary);" id="p1-desc">تصميم صفحة هبوط احترافية متكاملة لخدماتك مع دعم فني مجاني.</p>
     </div>
-    <div class="card tilt-card" style="border-color: #ff00cc;">
+    <div class="card" style="border-color: #ff00cc;">
       <span class="offer-badge" id="badge-best">الأكثر طلباً 🔥</span>
       <h3 id="p2-title">موقع شركات ونظام مخصص</h3>
       <div style="margin: 15px 0;">
@@ -282,7 +307,7 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
         <input type="email" id="senderEmail" placeholder="البريد الإلكتروني" required>
       </div>
       <div class="form-group">
-        <input type="textarea" id="senderMessage" placeholder="تفاصيل مشروعك أو رسالتك..." required>
+        <input type="text" id="senderMessage" placeholder="تفاصيل مشروعك أو رسالتك..." required>
       </div>
       <button type="submit" class="btn-cyber" style="width: 100%;" id="submit-btn">إرسال الرسالة عبر الجيميل</button>
     </form>
@@ -292,148 +317,88 @@ section h2::after { content: ''; position: absolute; bottom: -15px; left: 50%; t
 <button id="topBtn" onclick="scrollTopPage()">↑</button>
 
 <script>
-// --- نظام جزيئات الخلفية التفاعلي الفاخر (Canvas Particles) ---
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let particlesArray = [];
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 0.5;
-    this.speedX = Math.random() * 0.5 - 0.25;
-    this.speedY = Math.random() * 0.5 - 0.25;
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.x > canvas.width) this.x = 0;
-    else if (this.x < 0) this.x = canvas.width;
-    if (this.y > canvas.height) this.y = 0;
-    else if (this.y < 0) this.y = canvas.height;
-  }
-  draw() {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    ctx.fillStyle = isLight ? 'rgba(51, 51, 255, 0.15)' : 'rgba(0, 255, 255, 0.2)';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-function initParticles() {
-  particlesArray = [];
-  const numberOfParticles = Math.floor((canvas.width * canvas.height) / 9000);
-  for (let i = 0; i < numberOfParticles; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-initParticles();
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particlesArray.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-
-
-// --- كود تشغيل وإخفاء اللودنج بسلاسة ---
 const loaderScreen = document.getElementById("loading-screen");
-function triggerLoadingEffect(callback) {
+const navLinks = document.getElementById("nav-links");
+
+// إدارة شاشة اللودر بشكل مريح دون تكرار مزعج
+function showLoader(duration, callback) {
   loaderScreen.style.display = "flex";
   loaderScreen.style.opacity = "1";
   setTimeout(() => {
     if(callback) callback();
     loaderScreen.style.opacity = "0";
-    setTimeout(() => { loaderScreen.style.display = "none"; }, 500);
-  }, 600);
+    setTimeout(() => { loaderScreen.style.display = "none"; }, 400);
+  }, duration);
 }
 
-window.addEventListener("DOMContentLoaded", () => { triggerLoadingEffect(); });
+// اللودر يظهر عند أول دخول للموقع فقط لحماية تجربة المستخدم
+window.addEventListener("DOMContentLoaded", () => { showLoader(800); });
 
-document.querySelectorAll(".page-link").forEach(link => {
-  link.addEventListener("click", (e) => {
-    const targetHref = link.getAttribute("href");
-    if(!targetHref.startsWith("#")) {
-      e.preventDefault();
-      triggerLoadingEffect(() => { window.location.href = targetHref; });
-    }
+// إغلاق قائمة الموبايل عند الضغط على الروابط الداخلية
+document.querySelectorAll(".internal-link").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("active");
   });
 });
 
+// اللودر مخصص فقط عند الانتقال الخارجي الفعلي
+document.querySelectorAll(".external-link").forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const destination = link.getAttribute("href");
+    showLoader(600, () => {
+      window.location.href = destination;
+    });
+  });
+});
 
-// --- مراقب الصعود والنزول لتنشيط الأقسام وشريط الملاحة ---
+// قائمة الهواتف الذكية (Hamburger Menu)
+function toggleMenu() {
+  navLinks.classList.toggle("active");
+}
+
+// مراقبة الأقسام لتأثير الظهور التدريجي الفخم
 const sections = document.querySelectorAll('section');
-const navbar = document.getElementById('navbar');
-const topBtn = document.getElementById("topBtn");
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('in-view'); }
+        else { entry.target.classList.remove('in-view'); }
     });
 }, { threshold: 0.1 });
 sections.forEach(section => { observer.observe(section); });
 
 function scrollTopPage(){ window.scrollTo({top:0, behavior:"smooth"}); }
-
 window.onscroll = function(){
-  if(document.documentElement.scrollTop > 50){ 
-    navbar.classList.add('scrolled'); 
-  } else { 
-    navbar.classList.remove('scrolled'); 
-  }
-  
-  if(document.documentElement.scrollTop > 400){ 
-    topBtn.classList.add('visible'); 
-  } else { 
-    topBtn.classList.remove('visible'); 
-  }
+  let btn = document.getElementById("topBtn");
+  if(document.documentElement.scrollTop > 400){ btn.style.display = "flex"; } else { btn.style.display = "none"; }
 };
 
-
-// --- تأثير تحويم كروت ثلاثي الأبعاد (3D Tilt Effect) ---
-const cards = document.querySelectorAll('.tilt-card');
-cards.forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const xc = rect.width / 2;
-    const yc = rect.height / 2;
-    const angleX = (yc - y) / 15; // زاوية الدوران العمودي
-    const angleY = (x - xc) / 15; // زاوية الدوران الأفقي
-    card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px)`;
-  });
-  
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
-  });
-});
-
-
-// --- نظام إدارة المظهر واللغات المتقدم ---
+// نظام المظهر المطور مع تأثير التغبيش السائل المستقر
 let currentTheme = localStorage.getItem("theme") || "dark";
 let currentLang = localStorage.getItem("lang") || "ar";
 
 document.documentElement.setAttribute("data-theme", currentTheme);
 applyThemeUI(currentTheme);
 
+function applyThemeUI(theme) {
+  document.getElementById("theme-btn").innerHTML = theme === "light" ? "☀️ فاتح" : "🌙 داكن";
+}
+
+function toggleTheme() {
+  document.body.style.setProperty('--blur-amount', '12px');
+  setTimeout(() => {
+    currentTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    localStorage.setItem("theme", currentTheme);
+    applyThemeUI(currentTheme);
+    setTimeout(() => { document.body.style.setProperty('--blur-amount', '0px'); }, 150);
+  }, 200);
+}
+
+// قاموس اللغات الكامل المترجم
 const languages = {
   ar: {
-    dir: "rtl", loadTxt: "جاري تحميل منصة Torrema...",
-    home: "الرئيسية", services: "الخدمات", pricing: "الأسعار", gallery: "المعرض", contact: "التواصل",
+    dir: "rtl", home: "الرئيسية", services: "الخدمات", pricing: "الأسعار", gallery: "المعرض", contact: "التواصل",
     heroP: "أهلاً بك في منصة Torrema لتطوير الحلول البرمجية الذكية وتصميم المواقع الإلكترونية.",
     heroBtn: "اكتشف خدماتنا", sTitle: "خدماتنا", pTitle: "باقاتنا وعروضنا", gTitle: "معرض الأعمال", cTitle: "تواصل معنا",
     s1T: "تصميم مواقع", s1D: "واجهات متجاوبة ومتوافقة مع جميع الشاشات المتطورة.",
@@ -447,14 +412,13 @@ const languages = {
     subBtn: "إرسال الرسالة عبر الجيميل", pName: "الاسم الكريم", pEmail: "البريد الإلكتروني", pMsg: "تفاصيل مشروعك أو رسالتك..."
   },
   en: {
-    dir: "ltr", loadTxt: "Loading Torrema Platform...",
-    home: "Home", services: "Services", pricing: "Pricing", gallery: "Gallery", contact: "Contact",
+    dir: "ltr", home: "Home", services: "Services", pricing: "Pricing", gallery: "Gallery", contact: "Contact",
     heroP: "Welcome to Torrema platform for developing smart software solutions and modern web design.",
     heroBtn: "Discover Our Services", sTitle: "Our Services", pTitle: "Our Rates & Offers", gTitle: "Our Gallery", cTitle: "Contact Us",
     s1T: "Web Design", s1D: "Responsive and fully compatible interfaces across all advanced screens.",
     s2T: "Professional Dev", s2D: "Building fast, ultra-stable, and fully secured custom software.",
     s3T: "UI/UX Experience", s3D: "Engineering a smooth user journey free of visual complexities.",
-    p1T: "Landing Page / Landing", p1D: "Professional landing page design optimized for your services with free support.",
+    p1T: "Landing Page Creation", p1D: "Professional landing page design optimized for your services with free support.",
     p2T: "Corporate & Custom Systems", p2D: "Complete software system built with an admin dashboard and secure databases.",
     bdg1: "40% Off Limited Time Offer", bdg2: "Most Popular 🔥",
     gal1: "Backend Architectures", gal2: "Smart Dashboards Dev", gal3: "Cloud Systems Deployment",
@@ -463,23 +427,11 @@ const languages = {
   }
 };
 
-function applyThemeUI(theme) {
-  document.getElementById("theme-btn").innerHTML = theme === "light" ? "☀️ فاتح" : "🌙 داكن";
-}
-
-function toggleTheme() {
-  currentTheme = currentTheme === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", currentTheme);
-  localStorage.setItem("theme", currentTheme);
-  applyThemeUI(currentTheme);
-}
-
 function applyLanguage(lang) {
   const data = languages[lang];
   document.documentElement.setAttribute("dir", data.dir);
   document.documentElement.setAttribute("lang", lang);
   
-  document.getElementById("load-txt").innerText = data.loadTxt;
   document.getElementById("lnk-home").innerText = data.home;
   document.getElementById("lnk-services").innerText = data.services;
   document.getElementById("lnk-pricing").innerText = data.pricing;
@@ -522,29 +474,18 @@ function applyLanguage(lang) {
 function toggleLang() {
   currentLang = currentLang === "ar" ? "en" : "ar";
   localStorage.setItem("lang", currentLang);
-  triggerLoadingEffect(() => { 
-    applyLanguage(currentLang); 
-    // إعادة تهيئة تأثير الكتابة بعد تغيير اللغة للمظهر الاحترافي
-    i = 0;
-    typing();
-  });
+  showLoader(600, () => { applyLanguage(currentLang); });
 }
 
-// --- تأثير الكتابة التلقائية المطور ---
+// تأثير الكتابة التلقائية المستقر والآمن من تداخل اللغات
 let text = "Torrema"; let i = 0; let titleElement = document.getElementById("title");
-let typingTimeout;
-
+titleElement.innerHTML = "";
 function typing(){
-  clearTimeout(typingTimeout);
   if(i < text.length){
     titleElement.innerHTML = text.substring(0, i + 1) + '<span style="color:#ff00cc; animation: blink 0.7s infinite;">|</span>';
-    i++; 
-    typingTimeout = setTimeout(typing, 200);
-  } else { 
-    titleElement.innerHTML = text; 
-  }
+    i++; setTimeout(typing, 200);
+  } else { titleElement.innerHTML = text; }
 }
-
 const style = document.createElement('style');
 style.innerHTML = '@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }';
 document.head.appendChild(style);
@@ -560,7 +501,7 @@ document.getElementById('directMailForm').addEventListener('submit', function(e)
   const email = document.getElementById('senderEmail').value;
   const message = document.getElementById('senderMessage').value;
   const myEmail = "abdulreadhido@gmail.com";
-  const subject = encodeURIComponent("طلب أسعار مخفضة من: " + name);
+  const subject = encodeURIComponent("طلب برمجيات من Torrema: " + name);
   const bodyText = encodeURIComponent("الاسم: " + name + "\nالإيميل: " + email + "\nالرسالة:\n" + message);
   window.location.href = `mailto:${myEmail}?subject=${subject}&body=${bodyText}`;
 });
