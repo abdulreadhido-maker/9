@@ -67,7 +67,7 @@ select, input[type="range"] { width: 100%; padding: 12px; background: #13131a; b
 
     <div class="result-box">
       <div>التكلفة التقديرية لمشروعك:</div>
-      <div class="price-tag" id="total-price">$300</div>
+      <div class="price-tag" id="total-price">$75</div>
       <div style="font-size: 14px; color: var(--text-sec);">الوقت المتوقع للتسليم: <span id="delivery-time" style="color: #fff; font-weight: bold;">4 أيام</span></div>
     </div>
   </div>
@@ -89,11 +89,11 @@ function calculateProject() {
   let basePrice = 0;
   let days = 0;
 
-  if(pages === 1) { basePrice = 300; days = 4; }
-  else if(pages === 5) { basePrice = 600; days = 9; }
-  else if(pages === 10) { basePrice = 1100; days = 16; }
+  if(pages === 1) { basePrice = 75; days = 4; }
+  else if(pages === 5) { basePrice = 200; days = 9; }
+  else if(pages === 10) { basePrice = 420; days = 16; }
 
-  if(hasSEO) { basePrice += 150; days += 2; }
+  if(hasSEO) { basePrice += 131; days += 2; }
   if(hasSupport) { basePrice += 100; }
 
   document.getElementById('total-price').innerText = "$" + basePrice;
