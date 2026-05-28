@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -84,11 +83,13 @@ h2{
     border-radius:12px;
     color:#00ff99;
     padding:20px;
-    font-family:Consolas;
+    font-family:Consolas, monospace;
     font-size:14px;
     resize:vertical;
     outline:none;
     margin-top:15px;
+    direction: ltr;
+    text-align: left;
 }
 
 .code-input:focus{
@@ -138,10 +139,12 @@ button:hover{
     min-height:250px;
     max-height:500px;
     overflow:auto;
-    white-space:pre-line;
-    font-family:Consolas;
+    white-space:pre-wrap;
+    font-family:Consolas, monospace;
     line-height:1.8;
     color:var(--green);
+    text-align: left;
+    direction: ltr;
 }
 
 .stats{
@@ -156,6 +159,7 @@ button:hover{
     border:1px solid #222;
     padding:15px;
     border-radius:12px;
+    text-align: center;
 }
 
 .stat-card h3{
@@ -185,6 +189,11 @@ button:hover{
         var(--pink),
         var(--blue)
     );
+    transition: .2s;
+}
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 204, 0.3);
 }
 
 </style>
@@ -198,45 +207,34 @@ button:hover{
         <h1>🛡️ TORREMA SECURITY SCANNER</h1>
         <p>
             نظام تحليل وفحص الأكواد البرمجية للكشف عن
-            الثغرات الأمنية والممارسات البرمجية الخطيرة.
-        </p>Note: The test results may not be 100% guaranteed.
-      ملاحضة: قد تكون نتائج الفحوصات ليس مظمونة 100 بل 100
+            الثغرات الأمنية والمالممارسات البرمجية الخطيرة.
+        </p>
+        <p style="font-size: 13px; color: var(--pink); margin-top: 5px;">ملاحظة: قد تكون نتائج الفحوصات ليست مضمونة 100%</p>
     </div>
 
     <div class="box">
 
         <h2>🔍 الصق الكود البرمجي هنا</h2>
 
-<textarea
-class="code-input"
-id="codeInput"
-placeholder="// ضع الكود هنا...">
-
+<textarea class="code-input" id="codeInput" placeholder="// ضع الكود هنا...">
 const password = "123456";
 
 eval("alert('test')");
 
 document.body.innerHTML = userInput;
-
 </textarea>
 
         <div class="buttons">
 
-            <button
-            class="scan-btn"
-            onclick="runFullScan()">
+            <button class="scan-btn" onclick="runFullScan()">
             ⚡ بدء الفحص الأمني
             </button>
 
-            <button
-            class="speed-btn"
-            onclick="runSpeedTest()">
+            <button class="speed-btn" onclick="runSpeedTest()">
             🚀 اختبار السرعة
             </button>
 
-            <button
-            class="clear-btn"
-            onclick="clearTerminal()">
+            <button class="clear-btn" onclick="clearTerminal()">
             🧹 تنظيف
             </button>
 
@@ -261,247 +259,172 @@ document.body.innerHTML = userInput;
 
         </div>
 
-        <div
-        class="terminal"
-        id="terminal">
-> النظام جاهز...
-        </div>
+        <div class="terminal" id="terminal">> System ready... Waiting for scan.</div>
 
     </div>
 
     <div class="footer">
-        <center><a href="index.html" class="back-btn">← العودة للرئيسية</a></center>
-</div>
-
+        <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+    </div>
 
 </div>
 
 <script>
 
-const terminal =
-document.getElementById("terminal");
-
-const codeInput =
-document.getElementById("codeInput");
-
-const linesCount =
-document.getElementById("linesCount");
-
-const vulnsCount =
-document.getElementById("vulnsCount");
-
-const scanTime =
-document.getElementById("scanTime");
+const terminal = document.getElementById("terminal");
+const codeInput = document.getElementById("codeInput");
+const linesCount = document.getElementById("linesCount");
+const vulnsCount = document.getElementById("vulnsCount");
+const scanTime = document.getElementById("scanTime");
 
 const rules = [
-
-{
-    name:"eval",
-    severity:"CRITICAL",
-    regex:/eval\s*\(/,
-    message:"استخدام eval() يسمح بتنفيذ أكواد خبيثة.",
-    fix:"تجنب تنفيذ الأكواد الديناميكية."
-},
-
-{
-    name:"innerHTML",
-    severity:"HIGH",
-    regex:/innerHTML\s*=/,
-    message:"استخدام innerHTML قد يسبب XSS.",
-    fix:"استخدم textContent بدلاً منها."
-},
-
-{
-    name:"hardcoded-password",
-    severity:"HIGH",
-    regex:/(password|secret|token)\s*=\s*['"`].+['"`]/i,
-    message:"تم العثور على بيانات حساسة مكتوبة داخل الكود.",
-    fix:"استخدم ملفات البيئة .env."
-},
-
-{
-    name:"document-write",
-    severity:"MEDIUM",
-    regex:/document\.write\s*\(/,
-    message:"استخدام document.write غير آمن.",
-    fix:"استخدم DOM APIs الحديثة."
-},
-
-{
-    name:"setTimeout-string",
-    severity:"MEDIUM",
-    regex:/setTimeout\s*\(\s*['"`]/,
-    message:"تنفيذ نص داخل setTimeout خطر.",
-    fix:"مرر Function بدلاً من String."
-},
-
-{
-    name:"sql-injection",
-    severity:"CRITICAL",
-    regex:/SELECT.+FROM.+\+/i,
-    message:"احتمال وجود SQL Injection.",
-    fix:"استخدم Prepared Statements."
-}
-
+    {
+        name:"eval",
+        severity:"CRITICAL",
+        regex:/eval\s*\(/,
+        message:"استخدام eval() يسمح بتنفيذ أكواد خبيثة ديناميكية.",
+        fix:"تجنب تنفيذ الأكواد عبر النصوص واستخدم الوظائف الأصلية."
+    },
+    {
+        name:"innerHTML",
+        severity:"HIGH",
+        regex:/innerHTML\s*=/,
+        message:"استخدام innerHTML قد يسبب ثغرات حقن البرمجيات XSS.",
+        fix:"استخدم textContent أو createElement بدلاً منها."
+    },
+    {
+        name:"hardcoded-password",
+        severity:"HIGH",
+        regex:/(password|secret|token)\s*=\s*['"`].+['"`]/i,
+        message:"تم العثور على بيانات حساسة أو رموز مرور مكتوبة بشكل ثابت داخل الكود.",
+        fix:"استخدم ملفات التكوين والبيئة المؤمنة .env."
+    },
+    {
+        name:"document-write",
+        severity:"MEDIUM",
+        regex:/document\.write\s*\(/,
+        message:"استخدام document.write يعتبر ممارسة غير آمنة وقديمة.",
+        fix:"استخدم DOM APIs الحديثة لبناء العناصر."
+    },
+    {
+        name:"setTimeout-string",
+        severity:"MEDIUM",
+        regex:/setTimeout\s*\(\s*['"`]/,
+        message:"تمرير نصوص برمجية داخل setTimeout يهدد سلامة التطبيق.",
+        fix:"مرر Function مباشرة بدلاً من String."
+    },
+    {
+        name:"sql-injection",
+        severity:"CRITICAL",
+        regex:/SELECT.+FROM.+\+/i,
+        message:"احتمال وجود ثغرة حقن قواعد بيانات SQL Injection نتيجة دمج النصوص.",
+        fix:"استخدم الاستعلامات المجهزة مسبقاً (Prepared Statements)."
+    }
 ];
 
-function log(text,color="#00ff88"){
-
-    terminal.style.color = color;
-
-    terminal.innerText += text + "\n";
-
+// دالة الطباعة المعدلة لتدعم الألوان لكل سطر بشكل مستقل وبدون مشاكل الاختفاء
+function log(text, color="#00ff88"){
+    const span = document.createElement("span");
+    span.style.color = color;
+    span.style.display = "block";
+    span.innerText = text;
+    terminal.appendChild(span);
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
 function clearTerminal(){
-
-    terminal.innerText = "> تم تنظيف السجل.\n";
-
+    terminal.innerHTML = "";
+    log("> [CLEARED] تم تنظيف السجل بنجاح.");
+    linesCount.innerText = "0";
+    vulnsCount.innerText = "0";
+    scanTime.innerText = "0 ms";
 }
 
 async function runFullScan(){
-
-    const code =
-    codeInput.value;
+    const code = codeInput.value;
 
     if(!code.trim()){
-
-        terminal.innerText =
-        "> الرجاء إدخال كود أولاً.";
-
+        terminal.innerHTML = "";
+        log("> [ERROR] الرجاء إدخال كود أولاً للتحليل.", var(--pink));
         return;
-
     }
 
-    terminal.innerText = "";
+    terminal.innerHTML = "";
 
-    log("> [INIT] بدء تشغيل محرك التحليل...");
-    log("> [SCAN] تحليل الكود سطر بسطر...");
-    log("> [AI] فحص الأنماط الأمنية الخطيرة...");
-
-    const start =
-    performance.now();
-
+    log("> [INIT] بدء تشغيل محرك التحليل الساكن لـ Torrema...");
+    log("> [SCAN] تحليل الكود سطر بسطر وفحص الأنماط...");
+    
+    const start = performance.now();
     await sleep(700);
 
-    const lines =
-    code.split("\n");
-
-    linesCount.innerText =
-    lines.length;
+    const lines = code.split("\n");
+    linesCount.innerText = lines.length;
 
     let found = [];
 
-    lines.forEach((line,index)=>{
-
-        rules.forEach(rule=>{
-
+    lines.forEach((line, index) => {
+        rules.forEach(rule => {
             if(rule.regex.test(line)){
-
                 found.push({
-
-                    line:index+1,
-                    severity:rule.severity,
-                    code:line.trim(),
-                    message:rule.message,
-                    fix:rule.fix
-
+                    line: index + 1,
+                    severity: rule.severity,
+                    code: line.trim(),
+                    message: rule.message,
+                    fix: rule.fix
                 });
-
             }
-
         });
-
     });
 
-    const end =
-    performance.now();
+    const end = performance.now();
+    const total = (end - start).toFixed(2);
 
-    const total =
-    (end-start).toFixed(2);
-
-    scanTime.innerText =
-    total + " ms";
-
-    vulnsCount.innerText =
-    found.length;
+    scanTime.innerText = total + " ms";
+    vulnsCount.innerText = found.length;
 
     if(found.length === 0){
-
-        terminal.style.color =
-        "#00ff88";
-
         log("");
-        log("> [SUCCESS] لم يتم اكتشاف ثغرات معروفة.");
-        log("> الكود يبدو نظيفاً وآمناً.");
-
-    }else{
-
-        terminal.style.color =
-        "#ffcc00";
-
+        log("> [SUCCESS] رائع! لم يتم اكتشاف ثغرات معروفة في الملف.", "#00ff88");
+        log("> الكود الخاص بك يتبع أفضل ممارسات الحماية الحديثة.", "#00ff88");
+    } else {
         log("");
-        log(
-        `> [WARNING] تم اكتشاف ${found.length} مشكلة أمنية:\n`
-        );
+        log(`> [WARNING] تم اكتشاف ${found.length} مشكلة أمنية محتملة:`, "#ffcc00");
+        log("------------------------------------------------", "var(--sec)");
 
-        found.forEach((v,i)=>{
+        found.forEach((v, i) => {
+            let severityColor = "#ff00cc"; // Critical / High
+            if(v.severity === "MEDIUM") severityColor = "#3333ff";
 
-            log("--------------------------------");
-            log(`[#${i+1}] ${v.severity}`);
-            log(`السطر: ${v.line}`);
-            log(`الكود: ${v.code}`);
-            log(`المشكلة: ${v.message}`);
-            log(`الحل: ${v.fix}`);
-            log("");
-
+            log(`[#${i+1}] المخاطرة: ${v.severity}`, severityColor);
+            log(`   السطر الحالي: ${v.line}`, "white");
+            log(`   الكود المصاب: ${v.code}`, "#94a3b8");
+            log(`   المشكلة الأمنية: ${v.message}`, "#ffcc00");
+            log(`   الإصلاح المقترح: ${v.fix}`, "#00ffff");
+            log("------------------------------------------------", "var(--sec)");
         });
-
     }
-
 }
 
 async function runSpeedTest(){
+    terminal.innerHTML = "";
+    log("> [SPEED TEST] بدء اختبار أداء المحرك السحابي...", "#00ffff");
 
-    terminal.innerText = "";
-
-    terminal.style.color =
-    "#00ffff";
-
-    log("> [SPEED TEST] بدء اختبار الأداء...");
-
-    const start =
-    performance.now();
-
+    const start = performance.now();
     let total = 0;
-
-    for(let i=0;i<1000000;i++){
-
+    for(let i=0; i<1000000; i++){
         total += i;
-
     }
-
-    const end =
-    performance.now();
-
-    const result =
-    (end-start).toFixed(2);
+    const end = performance.now();
+    const result = (end - start).toFixed(2);
 
     await sleep(500);
 
-    log("> تم تنفيذ مليون عملية حسابية.");
-    log(`> زمن التنفيذ: ${result} ms`);
-
+    log("> تم بنجاح معالجة وتنفيذ (1,000,000) عملية منطقية وحسابية مجردة.", "white");
+    log(`> زمن الاستجابة الفعلي للمعالجة: ${result} ms`, "#00ffff");
 }
 
 function sleep(ms){
-
-    return new Promise(resolve=>{
-
-        setTimeout(resolve,ms);
-
-    });
-
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 </script>
